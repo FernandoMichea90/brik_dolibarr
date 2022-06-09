@@ -1,0 +1,19 @@
+FROM php:7.2-apache
+ENV PHP_INI_DIR /usr/local/etc/php/
+RUN  apt-get -y update \
+&& apt-get install -y libicu-dev \ 
+&& docker-php-ext-configure intl \
+&& docker-php-ext-install intl 
+
+RUN apt-get install -y \
+        zlib1g-dev \
+        zip \
+  && docker-php-ext-install zip
+RUN apt update && apt install -y libc-client-dev libkrb5-dev && rm -r /var/lib/apt/
+
+RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl && docker-php-ext-install imap
+
+RUN docker-php-ext-install calendar
+RUN apt-get update -y && apt-get install -y sendmail libpng-dev
+RUN docker-php-ext-install gd
+RUN docker-php-ext-install mysqli 
