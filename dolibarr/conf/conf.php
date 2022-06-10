@@ -28,7 +28,7 @@ $dolibarr_main_prod='0';
 $dolibarr_main_force_https='0';
 $dolibarr_main_restrict_os_commands='mysqldump, mysql, pg_dump, pgrestore';
 $dolibarr_nocsrfcheck='0';
-$dolibarr_main_instance_unique_id='833a1236b188fd8161434c2145394c8d';
+$dolibarr_main_instance_unique_id='a94aca26cc44f714d400a51f0f89785b';
 $dolibarr_mailing_limit_sendbyweb='0';
 
 //$dolibarr_lib_FPDF_PATH='';
