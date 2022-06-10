@@ -144,10 +144,11 @@ class MenuManager
 
 		if (empty($conf->global->MAIN_MENU_INVERT)) {
 			if ($mode == 'top') {
-				print_eldy_menu($this->db, $this->atarget, $this->type_user, $this->tabMenu, $this->menu, 0, $mode);
+				print_left_eldy_menu_metronic($this->db, $this->menu_array, $this->menu_array_after, $this->tabMenu, $this->menu, 0, '', '', $moredata, $this->type_user);
 			}
 			if ($mode == 'left') {
-				print_left_eldy_menu($this->db, $this->menu_array, $this->menu_array_after, $this->tabMenu, $this->menu, 0, '', '', $moredata, $this->type_user);
+				print_eldy_menu_metronic($this->db, $this->atarget, $this->type_user, $this->tabMenu, $this->menu, 0, $mode);
+
 			}
 		} else {
 			$conf->global->MAIN_SHOW_LOGO = 0;
