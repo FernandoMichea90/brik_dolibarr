@@ -29,7 +29,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./:/var/www/html
+      - ./dolibarr:/var/www/html
     environment:
         DOLI_DB_HOST: db
         DOLI_DB_USER: admin
@@ -54,9 +54,9 @@ services:
             - 8000:80
         environment:
           MYSQL_DATABASE: dolibarr
-          MYSQL_USER: my_username
-          MYSQL_PASSWORD: my_password
-          MYSQL_ROOT_PASSWORD: my_password
+          MYSQL_USER: dolibarr
+          MYSQL_PASSWORD: dolibarr
+          MYSQL_ROOT_PASSWORD: dolibarr
  
 volumes:
   html: {}
