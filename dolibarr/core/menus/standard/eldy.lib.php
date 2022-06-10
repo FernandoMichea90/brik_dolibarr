@@ -4075,9 +4075,19 @@ function print_left_eldy_menu_metronic($db, $menu_array_before, $menu_array_afte
 					}
 				}
 				if ($altok % 2 == 0) {
-					print '<div class="blockvmenu blockvmenuimpair'.$invert.($lastopened ? ' blockvmenulast' : '').($altok == 1 ? ' blockvmenufirst' : '').'">'."\n";
+					// print '<div class="blockvmenu blockvmenuimpair'.$invert.($lastopened ? ' blockvmenulast' : '').($altok == 1 ? ' blockvmenufirst' : '').'">'."\n";
+					print ' <div data-kt-menu-trigger="{default: \'click\', lg: \'hover\'}" data-kt-menu-placement="bottom-start" class="menu-item here show menu-lg-down-accordion me-lg-1">
+					<span class="menu-link py-3">
+						<span class="menu-title">Dashboards</span>
+						<span class="menu-arrow d-lg-none"></span>
+					</span>';
 				} else {
-					print '<div class="blockvmenu blockvmenupair'.$invert.($lastopened ? ' blockvmenulast' : '').($altok == 1 ? ' blockvmenufirst' : '').'">'."\n";
+					// print '<div class="blockvmenu blockvmenupair'.$invert.($lastopened ? ' blockvmenulast' : '').($altok == 1 ? ' blockvmenufirst' : '').'">'."\n";
+					print ' <div data-kt-menu-trigger="{default: \'click\', lg: \'hover\'}" data-kt-menu-placement="bottom-start" class="menu-item here show menu-lg-down-accordion me-lg-1">
+					<span class="menu-link py-3">
+						<span class="menu-title">Dashboards</span>
+						<span class="menu-arrow d-lg-none"></span>
+					</span>';
 				}
 			}
 

@@ -1837,6 +1837,8 @@ function top_menu($head, $title = '', $target = '', $disablejs = 0, $disablehead
 		top_htmlhead($head, $title, $disablejs, $disablehead, $arrayofjs, $arrayofcss, 0, $disablenofollow);
 		print '<body id="mainbody">';
 	}
+	//inicia el body  de metronic 
+	print '<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">';
 
 	/*
 	 * Top menu
@@ -1849,12 +1851,32 @@ function top_menu($head, $title = '', $target = '', $disablejs = 0, $disablehead
 
 		print "\n".'<!-- Start top horizontal -->'."\n";
 
-		print '<header id="id-top" class="side-nav-vert'.(GETPOST('dol_invisible_topmenu', 'int') ? ' hidden' : '').'">'; // dol_invisible_topmenu differs from dol_hide_topmenu: dol_invisible_topmenu means we output menu but we make it invisible.
-
+		// print '<header id="id-top" class="side-nav-vert'.(GETPOST('dol_invisible_topmenu', 'int') ? ' hidden' : '').'">'; // dol_invisible_topmenu differs from dol_hide_topmenu: dol_invisible_topmenu means we output menu but we make it invisible.
+		// se comienza el header con wrapper 2036-2046 
+		print '<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">';
+		print '<!--begin::Header-->';
+		print '<div id="kt_header" style="" class="header align-items-stretch">';
+		print '<!--begin::Container-->';
+		print '<div class="container-fluid d-flex align-items-stretch justify-content-between">';
+		print ' <!--begin::Wrapper-->
+		<div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+		<!--begin::Navbar-->
+		<div class="d-flex align-items-stretch" id="kt_header_nav">
+		<!--begin::Menu wrapper-->';
+		print "<div class=\"header-menu align-items-stretch\" data-kt-drawer=\"true\" data-kt-drawer-name=\"header-menu\" data-kt-drawer-activate=\"{default: true, lg: false}\" data-kt-drawer-overlay=\"true\" data-kt-drawer-width=\"{default:'200px', '300px': '250px'}\" data-kt-drawer-direction=\"end\" data-kt-drawer-toggle=\"#kt_header_menu_mobile_toggle\" data-kt-swapper=\"true\" data-kt-swapper-mode=\"prepend\" data-kt-swapper-parent=\"{default: '#kt_body', lg: '#kt_header_nav'}\">";
+		print ' <!--begin::Menu-->';
+		print '<div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch" id="#kt_header_menu" data-kt-menu="true">';
+		// // Show menu entries
 		// Show menu entries
-		print '<div id="tmenu_tooltip'.(empty($conf->global->MAIN_MENU_INVERT) ? '' : 'invert').'" class="tmenu">'."\n";
+		// print '<div id="tmenu_tooltip'.(empty($conf->global->MAIN_MENU_INVERT) ? '' : 'invert').'" class="tmenu">'."\n";
 		$menumanager->atarget = $target;
 		$menumanager->showmenu('top', array('searchform'=>$searchform)); // This contains a \n
+		print "</div>\n";
+		print "</div>\n";
+		print "</div>\n";
+		print "</div>\n";
+		print "</div>\n";
+		print "</div>\n";
 		print "</div>\n";
 
 		// Define link to login card
