@@ -1,0 +1,274 @@
+<html lang="es"><head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Dolibarr Development Team">
+     <link href="/metronic8/demo1/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css">
+    
+            <link href="/metronic8/demo1/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css">
+    
+            <!--end::Page Vendor Stylesheets-->
+            <!--begin::Global Stylesheets Bundle(used by all pages)-->
+    
+            <link href="/metronic8/demo1/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css">
+    
+            <link href="/metronic8/demo1/assets/css/style.bundle.css" rel="stylesheet" type="text/css"><link rel="shortcut icon" type="image/x-icon" href="/theme/dolibarr_256x256_color.png">
+    <link rel="manifest" href="/theme/eldy/manifest.json.php">
+    <title>Configuración</title>
+    <!-- Includes CSS for JQuery (Ajax library) -->
+    <link rel="stylesheet" type="text/css" href="/includes/jquery/css/base/jquery-ui.css?layout=classic&amp;version=15.0.2">
+    <link rel="stylesheet" type="text/css" href="/includes/jquery/plugins/jnotify/jquery.jnotify-alt.min.css?layout=classic&amp;version=15.0.2">
+    <link rel="stylesheet" type="text/css" href="/includes/jquery/plugins/select2/dist/css/select2.css?layout=classic&amp;version=15.0.2">
+    <!-- Includes CSS for font awesome -->
+    <link rel="stylesheet" type="text/css" href="/theme/common/fontawesome-5/css/all.min.css?layout=classic&amp;version=15.0.2">
+    <link rel="stylesheet" type="text/css" href="/theme/common/fontawesome-5/css/v4-shims.min.css?layout=classic&amp;version=15.0.2">
+    <!-- Includes CSS for Dolibarr theme -->
+    <link rel="stylesheet" type="text/css" href="/theme/eldy/style.css.php?lang=es_ES&amp;theme=eldy&amp;userid=1&amp;entity=1&amp;layout=classic&amp;version=15.0.2&amp;revision=9">
+    <!-- Includes JS for JQuery -->
+    <script src="/includes/jquery/js/jquery.min.js?layout=classic&amp;version=15.0.2"></script>
+    <script src="/includes/jquery/js/jquery-ui.min.js?layout=classic&amp;version=15.0.2"></script>
+    <script src="/includes/jquery/plugins/tablednd/jquery.tablednd.min.js?layout=classic&amp;version=15.0.2"></script>
+    <script src="/includes/jquery/plugins/jnotify/jquery.jnotify.min.js?layout=classic&amp;version=15.0.2"></script>
+    <script src="/includes/nnnick/chartjs/dist/Chart.min.js?layout=classic&amp;version=15.0.2"></script>
+    <script src="/includes/jquery/plugins/select2/dist/js/select2.full.min.js?layout=classic&amp;version=15.0.2"></script>
+    <script src="/includes/jquery/plugins/multiselect/jquery.multi-select.js?layout=classic&amp;version=15.0.2"></script>
+    <!-- Includes JS of Dolibarr -->
+    <script src="/core/js/lib_head.js.php?lang=es_ES&amp;layout=classic&amp;version=15.0.2"></script>
+    </head>
+    
+    <body id="mainbody" class="sidebar-collapse">
+    
+    <!-- Start top horizontal -->
+    <header id="id-top" class="side-nav-vert"><div id="tmenu_tooltip" class="tmenu">
+    <div class="tmenudiv"><ul role="navigation" class="tmenu"><li class="tmenu menuhider" id="mainmenutd_menu"><div class="tmenucenter"><a class="tmenuimage" tabindex="-1" href="#" title=""><div class="mainmenu menu topmenuimage"><span class="mainmenu tmenuimage" id="mainmenuspan_menu"></span></div></a><a class="tmenu menuhider" id="mainmenua_menu" href="#" title=""><span class="mainmenuaspan"></span></a></div></li>
+    <li class="tmenusel" id="mainmenutd_home"><div class="tmenucenter"><a class="tmenuimage" tabindex="-1" href="/index.php?mainmenu=home&amp;leftmenu=home" title="Inicio"><div class="mainmenu home topmenuimage"><span class="mainmenu tmenuimage" id="mainmenuspan_home"></span></div></a><a class="tmenusel" id="mainmenua_home" href="/index.php?mainmenu=home&amp;leftmenu=home" title="Inicio"><span class="mainmenuaspan">Inicio</span></a></div></li>
+    <li class="tmenu" id="mainmenutd_members"><div class="tmenucenter"><a class="tmenuimage" tabindex="-1" href="/adherents/index.php?mainmenu=members&amp;leftmenu=" title="Miembros"><div class="mainmenu members topmenuimage"><span class="mainmenu tmenuimage" id="mainmenuspan_members"></span></div></a><a class="tmenu" id="mainmenua_members" href="/adherents/index.php?mainmenu=members&amp;leftmenu=" title="Miembros"><span class="mainmenuaspan">Miembros</span></a></div></li>
+    <li class="tmenu" id="mainmenutd_hrm"><div class="tmenucenter"><a class="tmenuimage" tabindex="-1" href="/hrm/index.php?mainmenu=hrm&amp;leftmenu=" title="RRHH"><div class="mainmenu hrm topmenuimage"><span class="mainmenu tmenuimage" id="mainmenuspan_hrm"></span></div></a><a class="tmenu" id="mainmenua_hrm" href="/hrm/index.php?mainmenu=hrm&amp;leftmenu=" title="RRHH"><span class="mainmenuaspan">RRHH</span></a></div></li>
+    <li class="tmenu" id="mainmenutd_tools"><div class="tmenucenter"><a class="tmenuimage" tabindex="-1" href="/core/tools.php?mainmenu=tools&amp;leftmenu=" title="Utilidades"><div class="mainmenu tools topmenuimage"><span class="mainmenu tmenuimage" id="mainmenuspan_tools"></span></div></a><a class="tmenu" id="mainmenua_tools" href="/core/tools.php?mainmenu=tools&amp;leftmenu=" title="Utilidades"><span class="mainmenuaspan">Utilidades</span></a></div></li>
+    <li class="tmenuend" id="mainmenutd_"><div class="tmenucenter"></div></li>
+    </ul></div>
+    </div>
+    <div class="login_block usedropdown">
+    <div class="login_block_other"><div class="inline-block"><div class="classfortooltip inline-block login_block_elem inline-block" style="padding: 0px; padding: 0px; padding-right: 3px !important;" title="Mostrar página de impresión de la zona central"><a href="/admin/index.php?mainmenu=home&amp;leftmenu=setup&amp;optioncss=print" target="_blank" rel="noopener noreferrer"><span class="fa fa-print atoplogin valignmiddle"></span></a></div></div><div class="inline-block"><div class="classfortooltip inline-block login_block_elem inline-block" style="padding: 0px; padding: 0px; padding-right: 3px !important;" title="Leer la ayuda en línea (es necesario acceso a Internet ), <br><span class=&quot;fas fa-external-link-alt pictofixedwidth&quot; style=&quot;&quot;></span>Página Wiki &quot;Primeras configuraciones&quot; <span class=&quot;opacitymedium&quot;>(Página de ayuda dedicada relacionada con su pantalla actual)</span>"><a class="help" target="_blank" rel="noopener noreferrer" href="http://wiki.dolibarr.org/index.php/Primeras_configuraciones"><span class="fa fa-question-circle atoplogin valignmiddle helppresent"></span><span class="fa fa-long-arrow-alt-up helppresentcircle"></span></a></div></div><div class="inline-block"><div class="classfortooltip inline-block login_block_elem inline-block" style="padding: 0px; padding: 0px; padding-right: 3px !important;" title="Dolibarr 15.0.2"><span class="aversion"><span class="hideonsmartphone small">15.0.2</span></span></div></div><div class="inline-block"><div class="classfortooltip inline-block login_block_elem logout-btn inline-block" style="padding: 0px; padding: 0px; padding-right: 3px !important;" title="Desconexión<br>"><a accesskey="l" href="/user/logout.php?token=488d2795d0830c34611e89c3427d7589"><span class="fas fa-sign-out-alt atoplogin" style="" title="Desconexión"></span></a></div></div></div><div class="login_block_user"><div class="inline-block nowrap"><div class="inline-block login_block_elem login_block_elem_name" style="padding: 0px;"><!-- div for user link -->
+            <div id="topmenu-login-dropdown" class="userimg atoplogin dropdown user user-menu inline-block">
+                <a href="/user/card.php?id=1" class="dropdown-toggle login-dropdown-a" data-toggle="dropdown">
+                    <img class="photo photouserphoto userphoto" alt="No photo" src="/public/theme/common/user_anonymous.png"><span class="hidden-xs maxwidth200 atoploginusername hideonsmartphone paddingleft">dolibarr</span>
+                </a>
+                <div class="dropdown-menu">
+                    <!-- User image -->
+                    <div class="user-header">
+                        <img class="photo dropdown-user-image" alt="No photo" src="/public/theme/common/user_anonymous.png">
+                        <p>
+                            <i class="far fa-star classfortooltip" title="Administrador"></i> SuperAdmin (dolibarr)<br><small class="classfortooltip" title="Conectado desde : 09/06/2022 22:34<br>Conexión anterior : 09/06/2022 22:15"><i class="fa fa-user-clock"></i> 09/06/2022 22:34</small><br><small class="classfortooltip" title="Conectado desde : 09/06/2022 22:34<br>Conexión anterior : 09/06/2022 22:15"><i class="fa fa-user-clock opacitymedium"></i> 09/06/2022 22:15</small><br>
+                        </p>
+                    </div>
+    
+                    <!-- Menu Body -->
+                    <div class="user-body"><span id="topmenulogincompanyinfo-btn"><i class="fa fa-caret-right"></i> Mostrar información de la empresa</span><div id="topmenulogincompanyinfo"><br><b>R.U.T.</b>: <span><span class="clipboardCP clipboardCPShowOnHover"><span class="clipboardCPValue"></span><span class="clipboardCPButton far fa-clipboard opacitymedium paddingleft paddingright"></span><span class="clipboardCPText"></span></span></span><br><b>CIF intra.</b>: <span><span class="clipboardCP clipboardCPShowOnHover"><span class="clipboardCPValue"></span><span class="clipboardCPButton far fa-clipboard opacitymedium paddingleft paddingright"></span><span class="clipboardCPText"></span></span></span></div><br><span id="topmenuloginmoreinfo-btn"><i class="fa fa-caret-right"></i> Mostrar más información</span><div id="topmenuloginmoreinfo"><br><b>Administrador</b>: Sí<br><b>Tipo:</b> Interno<br><b>Estado</b>: Activado<br><br><u>Session</u><br><b>Dirección IP</b>: 172.27.0.1<br><b>Modo de autentificación:</b> dolibarr<br><b>Conectado desde:</b> 09/06/2022 22:34<br><b>Conexión anterior:</b> 09/06/2022 22:15<br><b>Tema actual:</b> eldy<br><b>Gestor menú actual:</b> eldy<br><b>Idioma actual:</b> <img src="/theme/common/flags/es.png" alt="" title="es_ES" class="inline-block"> es_ES<br><b>Zona horaria cliente (usuario):</b> -3 (America/Santiago)<br><b>Navegador:</b> chrome 102.0.0.0 (Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36)<br><b>Presentación:</b> classic<br><b>Pantalla:</b> 1813 x 822</div></div>
+    
+                    <!-- Menu Footer-->
+                    <div class="user-footer">
+                        <div class="pull-left">
+                            <a accesskey="l" href="/user/card.php?id=1" class="button-top-menu-dropdown"><i class="fa fa-user"></i>  Ficha</a>
+                        </div>
+                        <div class="pull-right">
+                            <a accesskey="l" href="/user/logout.php?token=488d2795d0830c34611e89c3427d7589" class="button-top-menu-dropdown"><i class="fa fa-sign-out-alt"></i> Desconexión</a>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+    
+                </div>
+            </div>
+            <!-- Code to show/hide the user drop-down -->
+            <script>
+            $( document ).ready(function() {
+                $(document).on("click", function(event) {
+                    if (!$(event.target).closest("#topmenu-login-dropdown").length) {
+                        //console.log("close login dropdown");
+                        // Hide the menus.
+                        $("#topmenu-login-dropdown").removeClass("open");
+                    }
+                });
+                
+                    $("#topmenu-login-dropdown .dropdown-toggle").on("click", function(event) {
+                        console.log("toggle login dropdown");
+                        event.preventDefault();
+                        $("#topmenu-login-dropdown").toggleClass("open");
+                    });
+    
+                    $("#topmenulogincompanyinfo-btn").on("click", function() {
+                        $("#topmenulogincompanyinfo").slideToggle();
+                    });
+    
+                    $("#topmenuloginmoreinfo-btn").on("click", function() {
+                        $("#topmenuloginmoreinfo").slideToggle();
+                    });
+            });
+            </script>
+            </div></div></div>
+    </div>
+    </header><div style="clear: both;"></div><!-- End top horizontal menu -->
+    
+    <!-- Begin div id-container --><div id="id-container" class="id-container">
+    <!-- Begin side-nav id-left -->
+    <div class="side-nav"><div id="id-left">
+    
+    <!-- Begin left menu -->
+    <div class="vmenu">
+    
+    
+    <!-- Begin SearchForm -->
+    <div id="blockvmenusearch" class="blockvmenusearch">
+    <select type="text" class="searchselectcombo vmenusearchselectcombo select2-hidden-accessible" name="searchselectcombo" data-select2-id="1" tabindex="-1" aria-hidden="true"><option data-select2-id="3"></option><option value="searchintomember" data-select2-id="4">&lt;span class="fas fa-user-alt  em092 infobox-adherent pictofixedwidth" style=""&gt;&lt;/span&gt; Miembros</option><option value="searchintouser" data-select2-id="5">&lt;span class="fas fa-user infobox-adherent pictofixedwidth" style=""&gt;&lt;/span&gt; Usuarios</option><option value="searchintoleaves" data-select2-id="6">&lt;span class="fas fa-umbrella-beach  em088 infobox-holiday pictofixedwidth" style=""&gt;&lt;/span&gt; D&amp;iacute;a libre</option></select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 188px;"><span class="selection"><span class="select2-selection select2-selection--single searchselectcombo vmenusearchselectcombo" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-searchselectcombo-9a-container"><span class="select2-selection__rendered" id="select2-searchselectcombo-9a-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Buscar</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span></div>
+    <!-- End SearchForm -->
+    <div class="blockvmenu blockvmenupair blockvmenufirst">
+    <!-- Process menu entry with mainmenu=home, leftmenu=home, level=0 enabled=1, position=0 -->
+    <div class="menu_titre"><a class="vmenu" title="Mi panel de control" href="/index.php?mainmenu=home&amp;leftmenu=home"><i class="fa fa-bar-chart fa-fw paddingright pictofixedwidth"></i>Mi panel de control</a></div>
+    <div class="menu_top"></div>
+    <div class="menu_end"></div>
+    </div>
+    <div class="blockvmenu blockvmenuimpair">
+    <!-- Process menu entry with mainmenu=home, leftmenu=setup, level=0 enabled=1, position=0 -->
+    <div class="menu_titre"><a class="vmenu" title="Configuración" href="/admin/index.php?mainmenu=home&amp;leftmenu=setup"><i class="fa fa-tools fa-fw paddingright pictofixedwidth"></i>Configuración</a></div>
+    <div class="menu_top"></div>
+    <!-- Process menu entry with mainmenu=, leftmenu=, level=1 enabled=1, position=0 -->
+    <div class="menu_contenu menu_contenu_admin_company"><a class="vsmenu" title="Empresa/Organización" href="/admin/company.php?mainmenu=home">Empresa/Organización</a><br></div>
+    <!-- Process menu entry with mainmenu=, leftmenu=, level=1 enabled=1, position=0 -->
+    <div class="menu_contenu menu_contenu_admin_modules"><a class="vsmenu" title="Módulos" href="/admin/modules.php?mainmenu=home">Módulos</a><br></div>
+    <!-- Process menu entry with mainmenu=, leftmenu=, level=1 enabled=1, position=0 -->
+    <div class="menu_contenu menu_contenu_admin_ihm"><a class="vsmenu" title="Entorno" href="/admin/ihm.php?mainmenu=home">Entorno</a><br></div>
+    <!-- Process menu entry with mainmenu=, leftmenu=, level=1 enabled=1, position=0 -->
+    <div class="menu_contenu menu_contenu_admin_menus"><a class="vsmenu" title="Menús" href="/admin/menus.php?mainmenu=home">Menús</a><br></div>
+    <!-- Process menu entry with mainmenu=, leftmenu=, level=1 enabled=1, position=0 -->
+    <div class="menu_contenu menu_contenu_admin_translation"><a class="vsmenu" title="Traducción" href="/admin/translation.php?mainmenu=home">Traducción</a><br></div>
+    <!-- Process menu entry with mainmenu=, leftmenu=, level=1 enabled=1, position=0 -->
+    <div class="menu_contenu menu_contenu_admin_defaultvalues"><a class="vsmenu" title="Valores/filtros/ordenación por defecto" href="/admin/defaultvalues.php?mainmenu=home">Valores/filtros/ordenación por defecto</a><br></div>
+    <!-- Process menu entry with mainmenu=, leftmenu=, level=1 enabled=1, position=0 -->
+    <div class="menu_contenu menu_contenu_admin_boxes"><a class="vsmenu" title="Paneles" href="/admin/boxes.php?mainmenu=home">Paneles</a><br></div>
+    <!-- Process menu entry with mainmenu=, leftmenu=, level=1 enabled=1, position=0 -->
+    <div class="menu_contenu menu_contenu_admin_delais"><a class="vsmenu" title="Alertas" href="/admin/delais.php?mainmenu=home">Alertas</a><br></div>
+    <!-- Process menu entry with mainmenu=, leftmenu=, level=1 enabled=1, position=0 -->
+    <div class="menu_contenu menu_contenu_admin_security_other"><a class="vsmenu" title="Seguridad" href="/admin/security_other.php?mainmenu=home">Seguridad</a><br></div>
+    <!-- Process menu entry with mainmenu=, leftmenu=, level=1 enabled=1, position=0 -->
+    <div class="menu_contenu menu_contenu_admin_limits"><a class="vsmenu" title="Límites y precisión" href="/admin/limits.php?mainmenu=home">Límites y precisión</a><br></div>
+    <!-- Process menu entry with mainmenu=, leftmenu=, level=1 enabled=1, position=0 -->
+    <div class="menu_contenu menu_contenu_admin_pdf"><a class="vsmenu" title="PDF" href="/admin/pdf.php?mainmenu=home">PDF</a><br></div>
+    <!-- Process menu entry with mainmenu=, leftmenu=, level=1 enabled=1, position=0 -->
+    <div class="menu_contenu menu_contenu_admin_mails"><a class="vsmenu" title="E-Mails" href="/admin/mails.php?mainmenu=home">E-Mails</a><br></div>
+    <!-- Process menu entry with mainmenu=, leftmenu=, level=1 enabled=1, position=0 -->
+    <div class="menu_contenu menu_contenu_admin_sms"><a class="vsmenu" title="SMS" href="/admin/sms.php?mainmenu=home">SMS</a><br></div>
+    <!-- Process menu entry with mainmenu=, leftmenu=, level=1 enabled=1, position=0 -->
+    <div class="menu_contenu menu_contenu_admin_dict"><a class="vsmenu" title="Diccionarios" href="/admin/dict.php?mainmenu=home">Diccionarios</a><br></div>
+    <!-- Process menu entry with mainmenu=, leftmenu=, level=1 enabled=1, position=0 -->
+    <div class="menu_contenu menu_contenu_admin_const"><a class="vsmenu" title="Otras configuraciones" href="/admin/const.php?mainmenu=home">Otras configuraciones</a><br></div>
+    <div class="menu_end"></div>
+    </div>
+    <div class="blockvmenu blockvmenupair">
+    <!-- Process menu entry with mainmenu=home, leftmenu=admintools, level=0 enabled=1, position=0 -->
+    <div class="menu_titre"><a class="vmenu" title="Herramientas de administración" href="/admin/tools/index.php?mainmenu=home&amp;leftmenu=admintools"><i class="fa fa-server fa-fw paddingright pictofixedwidth"></i>Herramientas de administración</a></div>
+    <div class="menu_top"></div>
+    <div class="menu_end"></div>
+    </div>
+    <div class="blockvmenu blockvmenuimpair blockvmenulast">
+    <!-- Process menu entry with mainmenu=home, leftmenu=users, level=0 enabled=1, position=0 -->
+    <div class="menu_titre"><a class="vmenu" title="Usuarios y grupos" href="/user/home.php?leftmenu=users"><span class="fas fa-user infobox-adherent paddingright pictofixedwidth" style=""></span>Usuarios y grupos</a></div>
+    <div class="menu_top"></div>
+    <div class="menu_end"></div>
+    </div>
+    <div class="blockvmenuend"></div>
+    <!-- Begin Help Block-->
+    <div id="blockvmenuhelp" class="blockvmenuhelp">
+    </div>
+    <!-- End Help Block-->
+    
+    </div>
+    <!-- End left menu -->
+    
+    </div></div> <!-- End side-nav id-left -->
+    <!-- Begin right area -->
+    <div id="id-right">
+    <!-- Begin div class="fiche" -->
+    <div class="fiche">
+    
+    <table class="centpercent notopnoleftnoright table-fiche-title"><tbody><tr class="titre"><td class="nobordernopadding widthpictotitle valignmiddle col-picto"><span class="fas fa-tools valignmiddle widthpictotitle pictotitle" style=""></span></td><td class="nobordernopadding valignmiddle col-title"><div class="titre inline-block">Configuración</div></td></tr></tbody></table>
+    <span class="opacitymedium hideonsmartphone">Antes de comenzar a usar Dolibarr, se deben definir algunos parámetros iniciales y habilitar/configurar los módulos. Los parámetros de configuración solamente pueden ser tratados por <b>usuarios administrador</b> Las siguientes dos secciones son obligatorias (las dos primeras entradas en el menú Configuración):<br><br></span><br><section class="setupsection"><span class="fas fa-building paddingright valignmiddle double" style=" color: #6c6aa8;"></span> <a href="/admin/company.php?mainmenu=home">Configuración-Empresa/Organización</a><br><br>Parámetros básicos utilizados para personalizar el comportamiento predeterminado de su aplicación (por ejemplo, para funciones relacionadas con el país).</section><br><br><section class="setupsection"><span class="fas fa-cog paddingright valignmiddle double" style=" color: #999;"></span> <a href="/admin/modules.php?mainmenu=home">Configuración-Módulos</a><br><br>Este software es un conjunto de muchos módulos/aplicaciones. Los módulos relacionados con sus necesidades deben ser habilitados y configurados. Las entradas del menú aparecerán con la activación de estos módulos.</section><br><br><br><span class="opacitymedium hideonsmartphone">Las otras entradas de configuración gestionan parámetros opcionales.</span><br><br class="hideonsmartphone"><div class="center"><div class="logo_setup"></div></div>
+    
+    </div> <!-- End div class="fiche" -->
+    </div> <!-- End div id-right -->
+    </div> <!-- End div id-container -->
+    
+    
+    <!-- Common footer for private page -->
+    
+    <!-- A div to store page_y POST parameter -->
+    <div id="page_y" style="display: none;"></div>
+    
+    <script>
+    jQuery(document).ready(function() {
+    
+    /* JS CODE TO ENABLE to manage handler to switch left menu page (menuhider) */
+    jQuery("li.menuhider").click(function(event) {  if (!$( "body" ).hasClass( "sidebar-collapse" )){ event.preventDefault(); }
+      console.log("We click on .menuhider");
+      $("body").toggleClass("sidebar-collapse")
+    });
+    });
+    
+    </script>
+    
+    <!-- JS CODE TO ENABLE select2 for id searchselectcombo -->
+                    <script>
+                    $(document).ready(function () {
+                        var data = [{"id":"searchintomember","text":"<span class=\"fas fa-user-alt  em092 infobox-adherent pictofixedwidth\" style=\"\"><\/span> Miembros","url":"\/adherents\/list.php"},{"id":"searchintouser","text":"<span class=\"fas fa-user infobox-adherent pictofixedwidth\" style=\"\"><\/span> Usuarios","url":"\/user\/list.php"},{"id":"searchintoleaves","text":"<span class=\"fas fa-umbrella-beach  em088 infobox-holiday pictofixedwidth\" style=\"\"><\/span> D&iacute;a libre","url":"\/holiday\/list.php?mainmenu=hrm"}];
+    
+                        var saveRemoteData = {"searchintomember":{"position":8,"shortcut":"M","img":"object_member","label":"Miembros","text":"<span class=\"fas fa-user-alt  em092 infobox-adherent pictofixedwidth\" style=\"\"><\/span> Miembros","url":"\/adherents\/list.php"},"searchintouser":{"position":200,"shortcut":"U","img":"object_user","label":"Usuarios","text":"<span class=\"fas fa-user infobox-adherent pictofixedwidth\" style=\"\"><\/span> Usuarios","url":"\/user\/list.php"},"searchintoleaves":{"position":220,"img":"object_holiday","label":"D&iacute;a libre","text":"<span class=\"fas fa-umbrella-beach  em088 infobox-holiday pictofixedwidth\" style=\"\"><\/span> D&iacute;a libre","url":"\/holiday\/list.php?mainmenu=hrm"}};
+    
+                        $(".searchselectcombo").select2({
+                            data: data,
+                            language: select2arrayoflanguage,
+                            containerCssClass: ':all:',					/* Line to add class of origin SELECT propagated to the new <span class="select2-selection...> tag */
+                            placeholder: "Buscar",
+                            escapeMarkup: function (markup) { return markup; }, 	// let our custom formatter work
+                            minimumInputLength: 1,
+                            formatResult: function(result, container, query, escapeMarkup) {
+                                return escapeMarkup(result.text);
+                            },
+                            matcher: function (params, data) {
+    
+                                if(! data.id) return null;
+    
+                                var urlBase = data.url;
+                                var separ = urlBase.indexOf("?") >= 0 ? "&" : "?";
+                                /* console.log("params.term="+params.term); */
+                                /* console.log("params.term encoded="+encodeURIComponent(params.term)); */
+                                saveRemoteData[data.id].url = urlBase + separ + "sall=" + encodeURIComponent(params.term.replace(/\"/g, ""));
+    
+                                return data;
+                            }
+                        });
+    
+                        
+                        /* Code to execute a GET when we select a value */
+                        $(".searchselectcombo").change(function() {
+                            var selected = $(".searchselectcombo").val();
+                            console.log("We select "+selected)
+    
+                            $(".searchselectcombo").val("");  /* reset visible combo value */
+                            $.each( saveRemoteData, function( key, value ) {
+                                if (key == selected)
+                                {
+                                    console.log("selectArrayFilter - Do a redirect to "+value.url)
+                                    location.assign(value.url);
+                                }
+                            });
+                        });
+    
+                    });
+                    </script>
+    <!-- Includes JS Footer of Dolibarr -->
+    <script src="/core/js/lib_foot.js.php?lang=es_ES&amp;layout=classic&amp;version=15.0.2"></script>
+    
+    <!-- A div to allow dialog popup by jQuery('#dialogforpopup').dialog() -->
+    <div id="dialogforpopup" style="display: none;"></div>
+    
+    
+    <div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div><div role="log" aria-live="assertive" aria-relevant="additions" class="ui-helper-hidden-accessible"></div></body></html>

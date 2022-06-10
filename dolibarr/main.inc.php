@@ -1462,6 +1462,13 @@ function top_htmlhead($head, $title = '', $disablejs = 0, $disablehead = 0, $arr
 		print '<meta name="robots" content="noindex'.($disablenofollow ? '' : ',nofollow').'">'."\n"; // Do not index
 		print '<meta name="viewport" content="width=device-width, initial-scale=1.0">'."\n"; // Scale for mobile device
 		print '<meta name="author" content="Dolibarr Development Team">'."\n";
+		print ' <link href="/metronic8/demo1/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css">'."\n".'
+		<link href="/metronic8/demo1/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css">'."\n".'
+		<!--end::Page Vendor Stylesheets-->
+		<!--begin::Global Stylesheets Bundle(used by all pages)-->'."\n".'
+		<link href="/metronic8/demo1/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css">'."\n".'
+		<link href="/metronic8/demo1/assets/css/style.bundle.css" rel="stylesheet" type="text/css">';
+	
 		if (getDolGlobalInt('MAIN_FEATURES_LEVEL')) {
 			print '<meta name="MAIN_FEATURES_LEVEL" content="'.getDolGlobalInt('MAIN_FEATURES_LEVEL').'">'."\n";
 		}
@@ -1836,7 +1843,10 @@ function top_menu($head, $title = '', $target = '', $disablejs = 0, $disablehead
 		$disablenofollow = 0;
 		top_htmlhead($head, $title, $disablejs, $disablehead, $arrayofjs, $arrayofcss, 0, $disablenofollow);
 		print '<body id="mainbody">';
+		//print '<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">';
 	}
+	//inicia el body  de metronic 
+	print '<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">';
 
 	/*
 	 * Top menu
@@ -1850,12 +1860,28 @@ function top_menu($head, $title = '', $target = '', $disablejs = 0, $disablehead
 		print "\n".'<!-- Start top horizontal -->'."\n";
 
 		print '<header id="id-top" class="side-nav-vert'.(GETPOST('dol_invisible_topmenu', 'int') ? ' hidden' : '').'">'; // dol_invisible_topmenu differs from dol_hide_topmenu: dol_invisible_topmenu means we output menu but we make it invisible.
-
-		// Show menu entries
+		// se comienza el header con wrapper 2036-2046 
+		// print '<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">';
+		// print '<!--begin::Header-->';
+		// print '<div id="kt_header" style="" class="header align-items-stretch">';
+		// print '<!--begin::Container-->';
+		// print '<div class="container-fluid d-flex align-items-stretch justify-content-between">';
+		// print ' <!--begin::Wrapper-->
+		// <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+		// <!--begin::Navbar-->
+		// <div class="d-flex align-items-stretch" id="kt_header_nav">
+		// <!--begin::Menu wrapper-->';
+		// print "<div class=\"header-menu align-items-stretch\" data-kt-drawer=\"true\" data-kt-drawer-name=\"header-menu\" data-kt-drawer-activate=\"{default: true, lg: false}\" data-kt-drawer-overlay=\"true\" data-kt-drawer-width=\"{default:'200px', '300px': '250px'}\" data-kt-drawer-direction=\"end\" data-kt-drawer-toggle=\"#kt_header_menu_mobile_toggle\" data-kt-swapper=\"true\" data-kt-swapper-mode=\"prepend\" data-kt-swapper-parent=\"{default: '#kt_body', lg: '#kt_header_nav'}\">";
+		// // Show menu entries
 		print '<div id="tmenu_tooltip'.(empty($conf->global->MAIN_MENU_INVERT) ? '' : 'invert').'" class="tmenu">'."\n";
 		$menumanager->atarget = $target;
 		$menumanager->showmenu('top', array('searchform'=>$searchform)); // This contains a \n
-		print "</div>\n";
+		// print "</div>\n";
+		// print "</div>\n";
+		// print "</div>\n";
+		// print "</div>\n";
+		// print "</div>\n";
+		// print "</div>\n";
 
 		// Define link to login card
 		$appli = constant('DOL_APPLICATION_TITLE');
@@ -2033,7 +2059,7 @@ function top_menu($head, $title = '', $target = '', $disablejs = 0, $disablehead
 
 		print "</div>\n"; // end div class="login_block"
 
-		print '</header>';
+		print '</div>';
 
 		print '<div style="clear: both;"></div>';
 		print "<!-- End top horizontal menu -->\n\n";

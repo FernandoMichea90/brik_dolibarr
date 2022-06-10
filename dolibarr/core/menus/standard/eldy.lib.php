@@ -441,7 +441,7 @@ function print_eldy_menu($db, $atarget, $type_user, &$tabMenu, &$menu, $noout = 
 	// Add menus
 	foreach ($menu_arr as $key => $smenu) {
 		$smenu = (object) $smenu;
-
+	
 		if ($smenu->enabled) {
 			if ($smenu->session) {
 				$_SESSION['idmenu'] = '';
@@ -589,8 +589,10 @@ function print_start_menu_array()
 {
 	global $conf;
 
-	print '<div class="tmenudiv">';
-	print '<ul role="navigation" class="tmenu"'.(empty($conf->global->MAIN_OPTIMIZEFORTEXTBROWSER) ? '' : ' title="Top menu"').'>';
+	// print '<div class="tmenudiv">';
+	print '<div>';
+	print '<div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch" id="#kt_header_menu" data-kt-menu="true">';
+	// print '<div role="navigation" class="tmenu"'.(empty($conf->global->MAIN_OPTIMIZEFORTEXTBROWSER) ? '' : ' title="Top menu"').'>';
 }
 
 /**
@@ -671,7 +673,7 @@ function print_end_menu_entry($showmode)
  */
 function print_end_menu_array()
 {
-	print '</ul>';
+	print '</div>';
 	print '</div>';
 	print "\n";
 }
