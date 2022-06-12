@@ -28,6 +28,8 @@
  *  \brief		Library for file eldy menus
  */
 require_once DOL_DOCUMENT_ROOT.'/core/class/menubase.class.php';
+require_once DOL_DOCUMENT_ROOT.'/logs/logger_test.php';
+
 
 
 /**
@@ -2719,7 +2721,7 @@ function print_left_eldy_menu($db, $menu_array_before, $menu_array_after, &$tabM
 
 function print_left_eldy_menu_metronic($db, $menu_array_before, $menu_array_after, &$tabMenu, &$menu, $noout = 0, $forcemainmenu = '', $forceleftmenu = '', $moredata = null, $type_user = 0)
 {
-
+	
 	global $user, $conf, $langs, $dolibarr_main_db_name, $mysoc, $hookmanager;
 
 	//var_dump($tabMenu);
@@ -2761,6 +2763,7 @@ function print_left_eldy_menu_metronic($db, $menu_array_before, $menu_array_afte
 		/*
 		 * Menu HOME
 		 */
+		logger(json_encode($mainmenu));
 		if ($mainmenu == 'home') {
 			$langs->load("users");
 
@@ -2769,7 +2772,7 @@ function print_left_eldy_menu_metronic($db, $menu_array_before, $menu_array_afte
 
 			// Setup
 			$newmenu->add("/admin/index.php?mainmenu=home&amp;leftmenu=setup", $langs->trans("Setup"), 0, $user->admin, '', $mainmenu, 'setup', 0, '', '', '', '<i class="fa fa-tools fa-fw paddingright pictofixedwidth"></i>');
-
+			logger(json_encode($newmenu));
 			if ($usemenuhider || empty($leftmenu) || $leftmenu == "setup") {
 				// Load translation files required by the page
 				$langs->loadLangs(array("admin", "help"));
