@@ -1327,7 +1327,7 @@ if (!function_exists("llxHeader")) {
 			$tmpcsstouse .= ' colorblind-'.strip_tags($conf->global->MAIN_OPTIMIZEFORCOLORBLIND);
 		}
 
-		print '<body id="mainbody" class="'.$tmpcsstouse.'">'."\n";
+		print '<body id="mainbody" class="'.$tmpcsstouse.' bodyColor">'."\n";
 
 		// top menu and left menu area
 		if (empty($conf->dol_hide_topmenu) || GETPOST('dol_invisible_topmenu', 'int')) {
@@ -1794,7 +1794,18 @@ function top_htmlhead($head, $title = '', $disablejs = 0, $disablehead = 0, $arr
 		$parameters = array();
 		$result = $hookmanager->executeHooks('addHtmlHeader', $parameters); // Note that $action and $object may have been modified by some hooks
 		print $hookmanager->resPrint; // Replace Title to show
-
+		print ' <!--begin::Fonts-->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700">
+		<!--end::Fonts-->
+		<!--begin::Page Vendor Stylesheets(used by this page)-->
+		<link href="/css/principal.css" rel="stylesheet" type="text/css">
+		<link href="/metronic8/demo1/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css">
+		<link href="/metronic8/demo1/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css">
+		<!--end::Page Vendor Stylesheets-->
+		<!--begin::Global Stylesheets Bundle(used by all pages)-->
+		<link href="/metronic8/demo1/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css">
+		<link href="/metronic8/demo1/assets/css/style.bundle.css" rel="stylesheet" type="text/css">
+		<!--end::Global Stylesheets Bundle-->';
 		print "</head>\n\n";
 	}
 
@@ -1838,7 +1849,7 @@ function top_menu($head, $title = '', $target = '', $disablejs = 0, $disablehead
 		print '<body id="mainbody">';
 	}
 	//inicia el body  de metronic 
-	print '<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">';
+	print '<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed bodyColor" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">';
 
 	/*
 	 * Top menu
@@ -3367,6 +3378,27 @@ if (!function_exists("llxFooter")) {
 		if ($reshook > 0) {
 			print $hookmanager->resPrint;
 		}
+
+		print '   <script src="/metronic8/demo1/assets/plugins/global/plugins.bundle.js"></script>
+		<script src="/metronic8/demo1/assets/js/scripts.bundle.js"></script>
+		<!--end::Global Javascript Bundle-->
+		<!--begin::Page Vendors Javascript(used by this page)-->
+		<script src="/metronic8/demo1/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+	<script type="text/javascript" id="">!function(b,e,f,g,a,c,d){b.fbq||(a=b.fbq=function(){a.callMethod?a.callMethod.apply(a,arguments):a.queue.push(arguments)},b._fbq||(b._fbq=a),a.push=a,a.loaded=!0,a.version="2.0",a.queue=[],c=e.createElement(f),c.async=!0,c.src=g,d=e.getElementsByTagName(f)[0],d.parentNode.insertBefore(c,d))}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","738802870177541");fbq("track","PageView");</script>
+	<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=738802870177541&amp;ev=PageView&amp;noscript=1"></noscript>
+	<script type="text/javascript" id="">try{(function(){var a=google_tag_manager["GTM-5FS8GGP"].macro(6);a="undefined"==typeof a?google_tag_manager["GTM-5FS8GGP"].macro(7):a;var b=new Date;b.setTime(b.getTime()+18E5);var c="gtm-session-start";b=b.toGMTString();var d="/",e=".keenthemes.com";document.cookie=c+"\x3d"+a+"; Expires\x3d"+b+"; domain\x3d"+e+"; Path\x3d"+d})()}catch(a){};</script><script type="text/javascript" id="">(function(){var a=google_tag_manager["GTM-5FS8GGP"].macro(8)-0+1,b=".keenthemes.com";document.cookie="damlPageCount\x3d"+a+";domain\x3d"+b+";path\x3d/;"})();</script>
+		<script src="/metronic8/demo1/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+		<!--end::Page Vendors Javascript-->
+		<!--begin::Page Custom Javascript(used by this page)-->
+		<script src="/metronic8/demo1/assets/js/widgets.bundle.js"></script>
+		<script src="/metronic8/demo1/assets/js/custom/widgets.js"></script>
+		<script src="/metronic8/demo1/assets/js/custom/apps/chat/chat.js"></script>
+		<script src="/metronic8/demo1/assets/js/custom/intro.js"></script>
+		<script src="/metronic8/demo1/assets/js/custom/utilities/modals/upgrade-plan.js"></script>
+		<script src="/metronic8/demo1/assets/js/custom/utilities/modals/create-app.js"></script>
+		<script src="/metronic8/demo1/assets/js/custom/utilities/modals/users-search.js"></script>
+		<!--end::Page Custom Javascript-->
+		<!--end::Javascript-->';
 
 		print "</body>\n";
 		print "</html>\n";

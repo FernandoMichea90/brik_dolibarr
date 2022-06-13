@@ -2672,12 +2672,20 @@ function print_left_eldy_menu($db, $menu_array_before, $menu_array_after, &$tabM
 
 				if ($menu_array[$i]['enabled'] && $lastlevel0 == 'enabled') {
 					// Enabled so visible, except if parent was not enabled.
-					print '<div class="menu_contenu'.$cssmenu.'">';
+					print '<div class="menu-item">';
 					print $tabstring;
 					if ($shorturlwithoutparam) {
-						print '<a class="vsmenu" title="'.dol_escape_htmltag(dol_string_nohtmltag($menu_array[$i]['titre'])).'" href="'.$url.'"'.($menu_array[$i]['target'] ? ' target="'.$menu_array[$i]['target'].'"' : '').'>';
+						print '<a class="menu-link active py-3" href="'.$url.'"'.($menu_array[$i]['target'] ? ' target="'.$menu_array[$i]['target'].'"' : '').'>';
+						print '<span class="menu-bullet">
+						<span class="bullet bullet-dot"></span>
+						</span>
+						<span class="menu-title">'.dol_escape_htmltag(dol_string_nohtmltag($menu_array[$i]['titre'])).'</span>';
 					} else {
-						print '<span class="vsmenu" title="'.dol_escape_htmltag($menu_array[$i]['titre']).'">';
+						print '<a class="menu-link active py-3" href="'.$url.'"'.($menu_array[$i]['target'] ? ' target="'.$menu_array[$i]['target'].'"' : '').'>';
+						print '<span class="menu-bullet">
+						<span class="bullet bullet-dot"></span>
+						</span>
+						<span class="menu-title">'.dol_escape_htmltag(dol_string_nohtmltag($menu_array[$i]['titre'])).'</span>';
 					}
 					print $menu_array[$i]['titre'];
 					if ($shorturlwithoutparam) {
@@ -2724,9 +2732,9 @@ function print_left_eldy_menu_metronic($db, $menu_array_before, $menu_array_afte
 	
 	global $user, $conf, $langs, $dolibarr_main_db_name, $mysoc, $hookmanager;
 
-	//var_dump($tabMenu);
-
+	
 	$newmenu = $menu;
+	
 
 	$mainmenu = ($forcemainmenu ? $forcemainmenu : $_SESSION["mainmenu"]);
 	$leftmenu = ($forceleftmenu ? '' : (empty($_SESSION["leftmenu"]) ? 'none' : $_SESSION["leftmenu"]));
@@ -2763,7 +2771,7 @@ function print_left_eldy_menu_metronic($db, $menu_array_before, $menu_array_afte
 		/*
 		 * Menu HOME
 		 */
-		logger(json_encode($mainmenu));
+	
 		if ($mainmenu == 'home') {
 			$langs->load("users");
 
@@ -4212,6 +4220,512 @@ function print_left_eldy_menu_metronic($db, $menu_array_before, $menu_array_afte
 		if ($altok) {
 			print '<div class="blockvmenuend"></div>'; // End menu block
 		}
+	}
+
+	return count($menu_array);
+}
+
+function print_left_eldy_menu_metronic_test($db, $menu_array_before, $menu_array_after, &$tabMenu, &$menu, $noout = 0, $forcemainmenu = '', $forceleftmenu = '', $moredata = null, $type_user = 0)
+{
+	global $user, $conf, $langs, $dolibarr_main_db_name, $mysoc, $hookmanager;
+
+	
+	$newmenu = $menu;
+	
+
+	$mainmenu = ($forcemainmenu ? $forcemainmenu : $_SESSION["mainmenu"]);
+	$leftmenu = ($forceleftmenu ? '' : (empty($_SESSION["leftmenu"]) ? 'none' : $_SESSION["leftmenu"]));
+
+	$usemenuhider = 0;
+
+	if (is_array($moredata) && !empty($moredata['searchform'])) {	// searchform can contains select2 code or link to show old search form or link to switch on search page
+		print "\n";
+		print "<!-- Begin SearchForm -->\n";
+		print '<div id="blockvmenusearch" class="blockvmenusearch">'."\n";
+		print $moredata['searchform'];
+		print '</div>'."\n";
+		print "<!-- End SearchForm -->\n";
+	}
+
+	if (is_array($moredata) && !empty($moredata['bookmarks'])) {
+		print "\n";
+		print "<!-- Begin Bookmarks -->\n";
+		print '<div id="blockvmenubookmarks" class="blockvmenubookmarks">'."\n";
+		print $moredata['bookmarks'];
+		print '</div>'."\n";
+		print "<!-- End Bookmarks -->\n";
+	}
+
+	$substitarray = getCommonSubstitutionArray($langs, 0, null, null);
+
+	$listofmodulesforexternal = explode(',', $conf->global->MAIN_MODULES_FOR_EXTERNAL);
+
+	/**
+	 * We update newmenu with entries found into database
+	 * --------------------------------------------------
+	 */
+	if ($mainmenu) {	// If this is empty, loading hard coded menu and loading personalised menu will fail
+		/*
+		 * Menu HOME
+		 */
+	
+		if ($mainmenu == 'home') {
+			$langs->load("users");
+
+			// Home - dashboard
+			$newmenu->add("/index.php?mainmenu=home&amp;leftmenu=home", $langs->trans("MyDashboard"), 0, 1, '', $mainmenu, 'home', 0, '', '', '', '<i class="fa fa-bar-chart fa-fw paddingright pictofixedwidth"></i>');
+
+			// Setup
+			$newmenu->add("/admin/index.php?mainmenu=home&amp;leftmenu=setup", $langs->trans("Setup"), 0, $user->admin, '', $mainmenu, 'setup', 0, '', '', '', '<i class="fa fa-tools fa-fw paddingright pictofixedwidth"></i>');
+			// if ($usemenuhider || empty($leftmenu) || $leftmenu == "setup") {
+				// Load translation files required by the page
+				$langs->loadLangs(array("admin", "help"));
+
+				$warnpicto = '';
+				if (empty($conf->global->MAIN_INFO_SOCIETE_NOM) || empty($conf->global->MAIN_INFO_SOCIETE_COUNTRY)) {
+					$langs->load("errors");
+					$warnpicto = img_warning($langs->trans("WarningMandatorySetupNotComplete"));
+				}
+				$newmenu->add("/admin/company.php?mainmenu=home", $langs->trans("MenuCompanySetup").$warnpicto, 1);
+
+				$warnpicto = '';
+				if (count($conf->modules) <= (empty($conf->global->MAIN_MIN_NB_ENABLED_MODULE_FOR_WARNING) ? 1 : $conf->global->MAIN_MIN_NB_ENABLED_MODULE_FOR_WARNING)) {	// If only user module enabled
+					$langs->load("errors");
+					$warnpicto = img_warning($langs->trans("WarningMandatorySetupNotComplete"));
+				}
+				$newmenu->add("/admin/modules.php?mainmenu=home", $langs->trans("Modules").$warnpicto, 1);
+				$newmenu->add("/admin/ihm.php?mainmenu=home", $langs->trans("GUISetup"), 1);
+				$newmenu->add("/admin/menus.php?mainmenu=home", $langs->trans("Menus"), 1);
+
+				$newmenu->add("/admin/translation.php?mainmenu=home", $langs->trans("Translation"), 1);
+				$newmenu->add("/admin/defaultvalues.php?mainmenu=home", $langs->trans("DefaultValues"), 1);
+				$newmenu->add("/admin/boxes.php?mainmenu=home", $langs->trans("Boxes"), 1);
+				$newmenu->add("/admin/delais.php?mainmenu=home", $langs->trans("MenuWarnings"), 1);
+				$newmenu->add("/admin/security_other.php?mainmenu=home", $langs->trans("Security"), 1);
+				$newmenu->add("/admin/limits.php?mainmenu=home", $langs->trans("MenuLimits"), 1);
+				$newmenu->add("/admin/pdf.php?mainmenu=home", $langs->trans("PDF"), 1);
+
+				$warnpicto = '';
+				if (!empty($conf->global->MAIN_MAIL_SENDMODE) && $conf->global->MAIN_MAIL_SENDMODE == 'mail' && empty($conf->global->MAIN_HIDE_WARNING_TO_ENCOURAGE_SMTP_SETUP)) {
+					$langs->load("errors");
+					$warnpicto = img_warning($langs->trans("WarningPHPMailD"));
+				}
+				if (!empty($conf->global->MAIN_MAIL_SENDMODE) && in_array($conf->global->MAIN_MAIL_SENDMODE, array('smtps', 'swiftmail')) && empty($conf->global->MAIN_MAIL_SMTP_SERVER)) {
+					$langs->load("errors");
+					$warnpicto = img_warning($langs->trans("ErrorSetupOfEmailsNotComplete"));
+				}
+
+				$newmenu->add("/admin/mails.php?mainmenu=home", $langs->trans("Emails").$warnpicto, 1);
+				$newmenu->add("/admin/sms.php?mainmenu=home", $langs->trans("SMS"), 1);
+				$newmenu->add("/admin/dict.php?mainmenu=home", $langs->trans("Dictionary"), 1);
+				$newmenu->add("/admin/const.php?mainmenu=home", $langs->trans("OtherSetup"), 1);
+			// }
+
+			// System tools
+			$newmenu->add("/admin/tools/index.php?mainmenu=home&amp;leftmenu=admintools", $langs->trans("AdminTools"), 0, $user->admin, '', $mainmenu, 'admintools', 0, '', '', '', '<i class="fa fa-server fa-fw paddingright pictofixedwidth"></i>');
+			// if ($usemenuhider || empty($leftmenu) || preg_match('/^admintools/', $leftmenu)) {
+				// Load translation files required by the page
+				$langs->loadLangs(array('admin', 'help'));
+
+				$newmenu->add('/admin/system/dolibarr.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('InfoDolibarr'), 1);
+				if ($usemenuhider || empty($leftmenu) || $leftmenu == 'admintools_info') {
+					$newmenu->add('/admin/system/modules.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('Modules'), 2);
+					$newmenu->add('/admin/triggers.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('Triggers'), 2);
+					$newmenu->add('/admin/system/filecheck.php?mainmenu=home&amp;leftmenu=admintools_info', $langs->trans('FileCheck'), 2);
+				}
+				$newmenu->add('/admin/system/browser.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('InfoBrowser'), 1);
+				$newmenu->add('/admin/system/os.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('InfoOS'), 1);
+				$newmenu->add('/admin/system/web.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('InfoWebServer'), 1);
+				$newmenu->add('/admin/system/phpinfo.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('InfoPHP'), 1);
+				$newmenu->add('/admin/system/database.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('InfoDatabase'), 1);
+				$newmenu->add("/admin/system/perf.php?mainmenu=home&amp;leftmenu=admintools", $langs->trans("InfoPerf"), 1);
+				$newmenu->add("/admin/system/security.php?mainmenu=home&amp;leftmenu=admintools", $langs->trans("InfoSecurity"), 1);
+				$newmenu->add("/admin/tools/dolibarr_export.php?mainmenu=home&amp;leftmenu=admintools", $langs->trans("Backup"), 1);
+				$newmenu->add("/admin/tools/dolibarr_import.php?mainmenu=home&amp;leftmenu=admintools", $langs->trans("Restore"), 1);
+				$newmenu->add("/admin/tools/update.php?mainmenu=home&amp;leftmenu=admintools", $langs->trans("MenuUpgrade"), 1);
+				$newmenu->add("/admin/tools/purge.php?mainmenu=home&amp;leftmenu=admintools", $langs->trans("Purge"), 1);
+				$newmenu->add("/admin/tools/listevents.php?mainmenu=home&amp;leftmenu=admintools", $langs->trans("Audit"), 1);
+				$newmenu->add("/admin/tools/listsessions.php?mainmenu=home&amp;leftmenu=admintools", $langs->trans("Sessions"), 1);
+				$newmenu->add('/admin/system/about.php?mainmenu=home&amp;leftmenu=admintools', $langs->trans('ExternalResources'), 1);
+
+				if (!empty($conf->product->enabled) || !empty($conf->service->enabled)) {
+					$langs->load("products");
+					$newmenu->add("/product/admin/product_tools.php?mainmenu=home&amp;leftmenu=admintools", $langs->trans("ProductVatMassChange"), 1, $user->admin);
+				}
+			// }
+
+			$newmenu->add("/user/home.php?leftmenu=users", $langs->trans("MenuUsersAndGroups"), 0, $user->rights->user->user->lire, '', $mainmenu, 'users', 0, '', '', '', img_picto('', 'user', 'class="paddingright pictofixedwidth"'));
+			if ($user->rights->user->user->lire) {
+				// if ($usemenuhider || empty($leftmenu) || $leftmenu == "users") {
+					$newmenu->add("", $langs->trans("Users"), 1, $user->rights->user->user->lire || $user->admin);
+					$newmenu->add("/user/card.php?leftmenu=users&action=create", $langs->trans("NewUser"), 2, ($user->rights->user->user->creer || $user->admin) && !(!empty($conf->multicompany->enabled) && $conf->entity > 1 && $conf->global->MULTICOMPANY_TRANSVERSE_MODE), '', 'home');
+					$newmenu->add("/user/list.php?leftmenu=users", $langs->trans("ListOfUsers"), 2, $user->rights->user->user->lire || $user->admin);
+					$newmenu->add("/user/hierarchy.php?leftmenu=users", $langs->trans("HierarchicView"), 2, $user->rights->user->user->lire || $user->admin);
+					if (!empty($conf->categorie->enabled)) {
+						$langs->load("categories");
+						$newmenu->add("/categories/index.php?leftmenu=users&type=7", $langs->trans("UsersCategoriesShort"), 2, $user->rights->categorie->lire, '', $mainmenu, 'cat');
+					}
+					$newmenu->add("", $langs->trans("Groups"), 1, ($user->rights->user->user->lire || $user->admin) && !(!empty($conf->multicompany->enabled) && $conf->entity > 1 && $conf->global->MULTICOMPANY_TRANSVERSE_MODE));
+					$newmenu->add("/user/group/card.php?leftmenu=users&action=create", $langs->trans("NewGroup"), 2, ((!empty($conf->global->MAIN_USE_ADVANCED_PERMS) ? $user->rights->user->group_advance->write : $user->rights->user->user->creer) || $user->admin) && !(!empty($conf->multicompany->enabled) && $conf->entity > 1 && $conf->global->MULTICOMPANY_TRANSVERSE_MODE));
+					$newmenu->add("/user/group/list.php?leftmenu=users", $langs->trans("ListOfGroups"), 2, ((!empty($conf->global->MAIN_USE_ADVANCED_PERMS) ? $user->rights->user->group_advance->read : $user->rights->user->user->lire) || $user->admin) && !(!empty($conf->multicompany->enabled) && $conf->entity > 1 && $conf->global->MULTICOMPANY_TRANSVERSE_MODE));
+				// }
+			}
+		}
+
+
+
+		// Add personalized menus and modules menus
+		// var_dump($newmenu->liste);    //
+		$menuArbo = new Menubase($db, 'eldy');
+		$newmenu = $menuArbo->menuLeftCharger($newmenu, $mainmenu, $leftmenu, (empty($user->socid) ? 0 : 1), 'eldy', $tabMenu);
+		// var_dump($newmenu->liste);    //
+
+		if (!empty($conf->ftp->enabled) && $mainmenu == 'ftp') {	// Entry for FTP
+			$MAXFTP = 20;
+			$i = 1;
+			while ($i <= $MAXFTP) {
+				$paramkey = 'FTP_NAME_'.$i;
+				//print $paramkey;
+				if (!empty($conf->global->$paramkey)) {
+					$link = "/ftp/index.php?idmenu=".$_SESSION["idmenu"]."&numero_ftp=".$i;
+					$newmenu->add($link, dol_trunc($conf->global->$paramkey, 24));
+				}
+				$i++;
+			}
+		}
+	}
+
+	//var_dump($tabMenu);    //
+	//var_dump($newmenu->liste);
+
+	// Build final $menu_array = $menu_array_before +$newmenu->liste + $menu_array_after
+	//var_dump($menu_array_before);exit;
+	//var_dump($menu_array_after);exit;
+	$menu_array = $newmenu->liste;
+	if (is_array($menu_array_before)) {
+		$menu_array = array_merge($menu_array_before, $menu_array);
+	}
+	if (is_array($menu_array_after)) {
+		$menu_array = array_merge($menu_array, $menu_array_after);
+	}
+	//var_dump($menu_array);exit;
+	if (!is_array($menu_array)) {
+		return 0;
+	}
+
+	// Allow the $menu_array of the menu to be manipulated by modules
+	$parameters = array(
+		'mainmenu' => $mainmenu,
+	);
+	$hook_items = $menu_array;
+	$reshook = $hookmanager->executeHooks('menuLeftMenuItems', $parameters, $hook_items); // Note that $action and $object may have been modified by some hooks
+
+	if (is_numeric($reshook)) {
+		if ($reshook == 0 && !empty($hookmanager->results)) {
+			$menu_array[] = $hookmanager->results; // add
+		} elseif ($reshook == 1) {
+			$menu_array = $hookmanager->results; // replace
+		}
+
+		// @todo Sort menu items by 'position' value
+		//      $position = array();
+		//      foreach ($menu_array as $key => $row) {
+		//          $position[$key] = $row['position'];
+		//      }
+		//      array_multisort($position, SORT_ASC, $menu_array);
+	}
+
+	// TODO Use the position property in menu_array to reorder the $menu_array
+	//var_dump($menu_array);
+	/*$new_menu_array = array();
+	$level=0; $cusor=0; $position=0;
+	$nbentry = count($menu_array);
+	while (findNextEntryForLevel($menu_array, $cursor, $position, $level))
+	{
+
+		$cursor++;
+	}*/
+
+	// Show menu
+	$invert = empty($conf->global->MAIN_MENU_INVERT) ? "" : "invert";
+
+	if (empty($noout)) {
+		$altok = 0;
+		$blockvmenuopened = false;
+		$lastlevel0 = '';
+		$num = count($menu_array);
+		$array[]=[];
+		$texto='';
+		logger(json_encode($num));
+		logger(json_encode($menu_array[40]));
+		for ($i = 0; $i < $num; $i++) {
+
+
+			if($menu_array[$i]['level']==0){
+			print '<div data-kt-menu-trigger="{default: \'click\', lg: \'hover\'}" data-kt-menu-placement="bottom-start" class="menu-item here show menu-lg-down-accordion me-lg-1">';
+
+			print '<span  class="py-3 ">
+					<a class="menu-title menu-link "  href='.$menu_array[$i]['url'].'>'.$menu_array[$i]['prefix'].''.$menu_array[$i]['titre'].'</a>
+					<span class="menu-arrow d-lg-none"></span>
+				</span>';
+			}
+		
+			
+		  // abierto 1A
+			if($menu_array[$i+1]['level']==1 && $menu_array[$i]['level']==0 ){
+             $texto=$texto.'<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
+			 <div class="hover-scroll-overlay-y mh-300px">';
+			}
+			
+		
+
+            if($menu_array[$i]['level']==1 && ($menu_array[$i+1]['level']==1 )){
+			 $texto=$texto.' <div class="menu-item">
+				<a class="menu-link  py-3" href="'.$menu_array[$i]['url'].'">
+					<span class="menu-bullet">
+						<span class="bullet bullet-dot"></span>
+					</span>
+					<span class="menu-title">'.$menu_array[$i]['titre'].'</span>
+				</a>
+			</div>';
+			}
+			if($menu_array[$i]['level']==1 && $menu_array[$i+1]['level']==2 ){
+				$texto=$texto.'<div data-kt-menu-trigger="{default: \'click\', lg: \'hover\'}" data-kt-menu-placement="right-start" class="menu-item   menu-lg-down-accordion me-lg-1">
+						<span class="menu-link py-3">
+							<span class="menu-icon">
+								<!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
+								<span class="svg-icon svg-icon-2">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+										<path d="M11.2929 2.70711C11.6834 2.31658 12.3166 2.31658 12.7071 2.70711L15.2929 5.29289C15.6834 5.68342 15.6834 6.31658 15.2929 6.70711L12.7071 9.29289C12.3166 9.68342 11.6834 9.68342 11.2929 9.29289L8.70711 6.70711C8.31658 6.31658 8.31658 5.68342 8.70711 5.29289L11.2929 2.70711Z" fill="currentColor"></path>
+										<path d="M11.2929 14.7071C11.6834 14.3166 12.3166 14.3166 12.7071 14.7071L15.2929 17.2929C15.6834 17.6834 15.6834 18.3166 15.2929 18.7071L12.7071 21.2929C12.3166 21.6834 11.6834 21.6834 11.2929 21.2929L8.70711 18.7071C8.31658 18.3166 8.31658 17.6834 8.70711 17.2929L11.2929 14.7071Z" fill="currentColor"></path>
+										<path opacity="0.3" d="M5.29289 8.70711C5.68342 8.31658 6.31658 8.31658 6.70711 8.70711L9.29289 11.2929C9.68342 11.6834 9.68342 12.3166 9.29289 12.7071L6.70711 15.2929C6.31658 15.6834 5.68342 15.6834 5.29289 15.2929L2.70711 12.7071C2.31658 12.3166 2.31658 11.6834 2.70711 11.2929L5.29289 8.70711Z" fill="currentColor"></path>
+										<path opacity="0.3" d="M17.2929 8.70711C17.6834 8.31658 18.3166 8.31658 18.7071 8.70711L21.2929 11.2929C21.6834 11.6834 21.6834 12.3166 21.2929 12.7071L18.7071 15.2929C18.3166 15.6834 17.6834 15.6834 17.2929 15.2929L14.7071 12.7071C14.3166 12.3166 14.3166 11.6834 14.7071 11.2929L17.2929 8.70711Z" fill="currentColor"></path>
+									</svg>
+								</span>
+								<!--end::Svg Icon-->
+							</span>
+							<a  href="'.$menu_array[$i]['url'].'"  class="menu-title">'.$menu_array[$i]['titre'].'</a>
+							<span class="menu-arrow"></span>
+						</span>
+					<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-active-bg py-lg-4 w-lg-225px">
+						'
+						;
+			   }
+   
+			   if($menu_array[$i]['level']==2 && ($menu_array[$i-1]['level']==1 ||$menu_array[$i+1]['level']==2 )){
+				$texto=$texto.'<div class="menu-item">
+				   <a class="menu-link  py-3" href="'.$menu_array[$i]['url'].'">
+					   <span class="menu-bullet">
+						   <span class="bullet bullet-dot"></span>
+					   </span>
+					   <span class="menu-title">'.$menu_array[$i]['titre'].'</span>
+				   </a>
+			   </div>';
+			   }
+			   // cierre 1A
+			   print $texto;
+			   $texto="";
+			if($menu_array[$i+1]['level']==0 && $menu_array[$i]['level']==1){
+				//print $texto;
+				$texto="";
+				print ' </div>';
+			    print ' </div>';
+			}
+
+			if($menu_array[$i+1]['level']==1 && $menu_array[$i]['level']==2){
+				//print $texto;
+				$texto="";
+				print '</div>';
+				print '</div>';
+			}
+			if($i+1==$num){
+				//print $texto;
+				
+				print '</div>';
+				print '</div>';
+				print '</div>';
+			}
+			
+		if($menu_array[$i+1]['level']==0 ) {
+			print '</div>';
+			}
+			
+			
+		 }
+		 
+		 print '</div>';
+
+
+		// for ($i = 0; $i < $num; $i++) {     // Loop on each menu entry
+		// 	$showmenu = true;
+		// 	if (!empty($conf->global->MAIN_MENU_HIDE_UNAUTHORIZED) && empty($menu_array[$i]['enabled'])) {
+		// 		$showmenu = false;
+		// 	}
+
+		// 	// Begin of new left menu block
+		// 	if (empty($menu_array[$i]['level']) && $showmenu) {
+		// 		$altok++;
+		// 		$blockvmenuopened = true;
+		// 		$lastopened = true;
+		// 		for ($j = ($i + 1); $j < $num; $j++) {
+		// 			if (empty($menu_array[$j]['level'])) {
+		// 				$lastopened = false;
+		// 			}
+		// 		}
+		// 		if ($altok % 2 == 0) {
+		// 			// print '<div class="blockvmenu blockvmenuimpair'.$invert.($lastopened ? ' blockvmenulast' : '').($altok == 1 ? ' blockvmenufirst' : '').'">'."\n";
+		// 			print ' <div data-kt-menu-trigger="{default: \'click\', lg: \'hover\'}" data-kt-menu-placement="bottom-start" class="menu-item here show menu-lg-down-accordion me-lg-1">';
+		// 			// 	<span class="menu-title">Dashboards</span>
+		// 			// 	<span class="menu-arrow d-lg-none"></span>
+		// 			// </span>';
+		// 		} else {
+		// 			// print '<div class="blockvmenu blockvmenupair'.$invert.($lastopened ? ' blockvmenulast' : '').($altok == 1 ? ' blockvmenufirst' : '').'">'."\n";
+		// 			// print ' <div data-kt-menu-trigger="{default: \'click\', lg: \'hover\'}" data-kt-menu-placement="bottom-start" class="menu-item here show menu-lg-down-accordion me-lg-1">';
+					
+		// 			// 	<span class="menu-title">Dashboards</span>
+		// 			// 	<span class="menu-arrow d-lg-none"></span>
+		// 			// </span>';
+		// 		}
+		// 	}
+
+		// 	// Add tabulation
+		// 	$tabstring = '';
+		// 	$tabul = ($menu_array[$i]['level'] - 1);
+		// 	if ($tabul > 0) {
+		// 		for ($j = 0; $j < $tabul; $j++) {
+		// 			$tabstring .= '&nbsp;&nbsp;&nbsp;';
+		// 		}
+		// 	}
+
+		// 	// $menu_array[$i]['url'] can be a relative url, a full external url. We try substitution
+
+		// 	$menu_array[$i]['url'] = make_substitutions($menu_array[$i]['url'], $substitarray);
+
+		// 	$url = $shorturl = $shorturlwithoutparam = $menu_array[$i]['url'];
+		// 	if (!preg_match("/^(http:\/\/|https:\/\/)/i", $menu_array[$i]['url'])) {
+		// 		$tmp = explode('?', $menu_array[$i]['url'], 2);
+		// 		$url = $shorturl = $tmp[0];
+		// 		$param = (isset($tmp[1]) ? $tmp[1] : ''); // params in url of the menu link
+
+		// 		// Complete param to force leftmenu to '' to close open menu when we click on a link with no leftmenu defined.
+		// 		if ((!preg_match('/mainmenu/i', $param)) && (!preg_match('/leftmenu/i', $param)) && !empty($menu_array[$i]['mainmenu'])) {
+		// 			$param .= ($param ? '&' : '').'mainmenu='.$menu_array[$i]['mainmenu'].'&leftmenu=';
+		// 		}
+		// 		if ((!preg_match('/mainmenu/i', $param)) && (!preg_match('/leftmenu/i', $param)) && empty($menu_array[$i]['mainmenu'])) {
+		// 			$param .= ($param ? '&' : '').'leftmenu=';
+		// 		}
+		// 		//$url.="idmenu=".$menu_array[$i]['rowid'];    // Already done by menuLoad
+		// 		$url = dol_buildpath($url, 1).($param ? '?'.$param : '');
+		// 		$shorturlwithoutparam = $shorturl;
+		// 		$shorturl = $shorturl.($param ? '?'.$param : '');
+		// 	}
+
+
+		// 	print '<!-- Process menu entry with mainmenu='.$menu_array[$i]['mainmenu'].', leftmenu='.$menu_array[$i]['leftmenu'].', level='.$menu_array[$i]['level'].' enabled='.$menu_array[$i]['enabled'].', position='.$menu_array[$i]['position'].' -->'."\n";
+
+		// 	// Menu level 0
+		// 	if ($menu_array[$i]['level'] == 0) {
+		// 		if ($menu_array[$i]['enabled']) {     // Enabled so visible
+		// 			print '<span class="menu-link py-3">';
+		// 			if ($shorturlwithoutparam) {
+		// 				print '<a class="menu-title" title="'.dol_escape_htmltag(dol_string_nohtmltag($menu_array[$i]['titre'])).'" href="'.$url.'"'.($menu_array[$i]['target'] ? ' target="'.$menu_array[$i]['target'].'"' : '').'>';
+		// 			} else {
+		// 				print '<span class="vmenu">';
+		// 			}
+		// 			print ($menu_array[$i]['prefix'] ? $menu_array[$i]['prefix'] : '').$menu_array[$i]['titre'];
+		// 			if ($shorturlwithoutparam) {
+		// 				print '</a>';
+		// 				print '</span>';
+		// 			} else {
+		// 				print '</span>';
+		// 			}
+					
+				
+		// 			$lastlevel0 = 'enabled';
+		// 		} elseif ($showmenu) {                 // Not enabled but visible (so greyed)
+		// 			print '<div class="menu_titre">'.$tabstring;
+		// 			print '<span class="vmenudisabled">';
+		// 			print ($menu_array[$i]['prefix'] ? $menu_array[$i]['prefix'] : '').$menu_array[$i]['titre'];
+		// 			print 'este</span>';
+		// 			print 'este no </div>'."\n";
+		// 			$lastlevel0 = 'greyed';
+		// 		} else {
+		// 			$lastlevel0 = 'hidden';
+		// 		}
+		// 		if ($showmenu) {
+		// 			// print '<div class="menu_top"></div>'."\n";
+		// 		}
+		// 		print '<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">';
+		// 		print '<div class="hover-scroll-overlay-y mh-300px">';
+		// 	}
+
+		// 		// // Menu level > 0
+		// 		// if ($menu_array[$i]['level'] > 0) {
+		// 		// 	$cssmenu = '';
+		// 		// 	if ($menu_array[$i]['url']) {
+		// 		// 		$cssmenu = ' menu_contenu'.dol_string_nospecial(preg_replace('/\.php.*$/', '', $menu_array[$i]['url']));
+		// 		// 	}
+	
+		// 		// 	if ($menu_array[$i]['enabled'] && $lastlevel0 == 'enabled') {
+		// 		// 		// Enabled so visible, except if parent was not enabled.
+		// 		// 		print '<div class="menu-item">';
+						
+		// 		// 		if ($shorturlwithoutparam) {
+		// 		// 			print '<a class="menu-link active py-3" href="'.$url.'"'.($menu_array[$i]['target'] ? ' target="'.$menu_array[$i]['target'].'"' : '').'>';
+		// 		// 			print '<span class="menu-bullet">
+		// 		// 			<span class="bullet bullet-dot"></span>
+		// 		// 			</span>
+		// 		// 			<span class="menu-title">'.dol_escape_htmltag(dol_string_nohtmltag($menu_array[$i]['titre'])).'</span>';
+		// 		// 		} else {
+		// 		// 			print '<a class="menu-link active py-3" href="'.$url.'"'.($menu_array[$i]['target'] ? ' target="'.$menu_array[$i]['target'].'"' : '').'>';
+		// 		// 			print '<span class="menu-bullet">
+		// 		// 			<span class="bullet bullet-dot"></span>
+		// 		// 			</span>
+		// 		// 			<span class="menu-title">'.dol_escape_htmltag(dol_string_nohtmltag($menu_array[$i]['titre'])).'</span>';
+		// 		// 		}
+		// 		// 		//print $menu_array[$i]['titre'];
+		// 		// 		if ($shorturlwithoutparam) {
+		// 		// 			print '</a>';
+		// 		// 		} else {
+		// 		// 			print '</span>';
+		// 		// 		}
+		// 		// 		// If title is not pure text and contains a table, no carriage return added
+		// 		// 		if (!strstr($menu_array[$i]['titre'], '<table')) {
+		// 		// 			print '<br>';
+		// 		// 		}
+		// 		// 		print '</div>'."\n";
+		// 		// 	} 
+		// 		// 	// elseif ($showmenu && $lastlevel0 == 'enabled') {
+		// 		// 	// 	// Not enabled but visible (so greyed), except if parent was not enabled.
+		// 		// 	// 	print '<div class="menu_contenu'.$cssmenu.'">';
+		// 		// 	// 	print $tabstring;
+		// 		// 	// 	print '<span class="vsmenudisabled vsmenudisabledmargin">'.$menu_array[$i]['titre'].'</span><br>';
+		// 		// 	// 	print '</div>'."\n";
+		// 		// 	// }
+		// 		// }
+	
+			
+			
+
+		
+			
+			
+		// 	// If next is a new block or if there is nothing after
+		// 	if (empty($menu_array[$i + 1]['level'])) {               // End menu block
+		// 		if ($showmenu) {
+		// 			// print '<div class="menu_end"></div>'."\n";
+		// 			print '</div>'."\n";
+		// 		}
+		// 		if ($blockvmenuopened) {
+		// 			 print 'gato </div>'."\n";
+		// 			$blockvmenuopened = false;
+		// 		}
+		// 	}
+		// }
+
+		// if ($altok) {
+			// print '<div class="blockvmenuend"></div>'; // End menu block
+		// }
 	}
 
 	return count($menu_array);
