@@ -1328,7 +1328,7 @@ if (!function_exists("llxHeader")) {
 		}
 
 		//print '<body id="mainbody" class="'.$tmpcsstouse.' bodyColor">'."\n";
-		print '<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">';
+		print '<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed bodyColor" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">';
 		print '  <!--begin::Main-->
 		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">
@@ -1345,14 +1345,14 @@ if (!function_exists("llxHeader")) {
 		}
 
 		
-		print '<perro>';
+		print '<div>';
 		// main area
 		if ($replacemainareaby) {
 			print $replacemainareaby;
 			return;
 		}
 		main_area($title);
-		print '</perro>';
+		print '</div>';
 
 		print '</div>';	
 		print '</div>';
@@ -2085,7 +2085,7 @@ function top_menu($head, $title = '', $target = '', $disablejs = 0, $disablehead
 	}
 
 	if (empty($conf->dol_hide_leftmenu) && empty($conf->dol_use_jmobile)) {
-		print '<!-- Begin div id-container --><div id="id-container" class="id-container">';
+		print '<!-- Begin div id-container --><div id="id-container" class="id-container paddingContainer">';
 	}
 }
 
@@ -2788,7 +2788,7 @@ function left_menu_metronic($menu_array_before, $helppagename = '', $notused = '
                 <div class="aside-logo flex-column-auto" id="kt_aside_logo">
                     <!--begin::Logo-->
                     <a href="/metronic8/demo1/../demo1/index.html">
-                        <img alt="Logo" src="/metronic8/demo1/assets/media/logos/logo-1-dark.svg" class="h-25px logo">
+                        <img alt="Logo" src="/metronic8/demo1/assets/media/logos/logo-2.svg" class="h-35px logo">
                     </a>
                     <!--end::Logo-->
                     <!--begin::Aside toggler-->
