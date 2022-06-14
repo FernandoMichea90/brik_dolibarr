@@ -1337,7 +1337,7 @@ if (!function_exists("llxHeader")) {
 				<!--begin::Aside-->';
 
 		if (empty($conf->dol_hide_leftmenu)) {
-			left_menu_metronic('', $help_url, '', '', 1, $title, 1); // $menumanager is retrieved with a global $menumanager inside this function
+			left_menu('', $help_url, '', '', 1, $title, 1); // $menumanager is retrieved with a global $menumanager inside this function
 		}
 		// top menu and left menu area
 		if (empty($conf->dol_hide_topmenu) || GETPOST('dol_invisible_topmenu', 'int')) {

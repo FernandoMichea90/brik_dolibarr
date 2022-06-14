@@ -147,7 +147,7 @@ class MenuManager
 				print_left_eldy_menu_metronic_test($this->db, $this->menu_array, $this->menu_array_after, $this->tabMenu, $this->menu, 0, '', '', $moredata, $this->type_user);
 			}
 			if ($mode == 'left') {
-				print_eldy_menu($this->db, $this->atarget, $this->type_user, $this->tabMenu, $this->menu, 0, $mode);
+				print_eldy_menu_metronic($this->db, $this->atarget, $this->type_user, $this->tabMenu, $this->menu, 0, $mode);
 
 			}
 		} else {

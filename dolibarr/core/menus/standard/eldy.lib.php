@@ -976,6 +976,7 @@ function print_eldy_menu_metronic($db, $atarget, $type_user, &$tabMenu, &$menu, 
 		'submenus' => array(),
 	);
 
+	logger('test'.json_encode($menu_arr));
 	// Add menus
 	foreach ($menu_arr as $key => $smenu) {
 		$smenu = (object) $smenu;
