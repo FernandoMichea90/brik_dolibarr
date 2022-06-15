@@ -88,7 +88,11 @@ function print_eldy_menu($db, $atarget, $type_user, &$tabMenu, &$menu, $noout = 
 		'id' => $id,
 		'idsel' => 'home',
 		'classname' =>  $classname = (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "home") ? 'class="tmenusel"' : 'class="tmenu"',
-		'prefix' => '<span class="fa fa-home fa-fw paddingright"></span>',
+		'prefix' => '<!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen001.svg-->
+		<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+		<path d="M11 2.375L2 9.575V20.575C2 21.175 2.4 21.575 3 21.575H9C9.6 21.575 10 21.175 10 20.575V14.575C10 13.975 10.4 13.575 11 13.575H13C13.6 13.575 14 13.975 14 14.575V20.575C14 21.175 14.4 21.575 15 21.575H21C21.6 21.575 22 21.175 22 20.575V9.575L13 2.375C12.4 1.875 11.6 1.875 11 2.375Z" fill="currentColor"/>
+		</svg></span>
+		<!--end::Svg Icon-->',
 		'session' => ((!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "home") ? 0 : 1),
 		'loadLangs' => array(),
 		'submenus' => array(),
@@ -113,7 +117,11 @@ function print_eldy_menu($db, $atarget, $type_user, &$tabMenu, &$menu, $noout = 
 		'id' => $id,
 		'idsel' => 'members',
 		'classname' =>  $classname = (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "members") ? 'class="tmenusel"' : 'class="tmenu"',
-		'prefix' => img_picto('', 'member', 'class="fa-fw paddingright"'),
+		'prefix' => '<!--begin::Svg Icon | path: assets/media/icons/duotune/general/gen001.svg-->
+		<span class="svg-icon svg-icon-muted svg-icon-2hx"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+		<path d="M11 2.375L2 9.575V20.575C2 21.175 2.4 21.575 3 21.575H9C9.6 21.575 10 21.175 10 20.575V14.575C10 13.975 10.4 13.575 11 13.575H13C13.6 13.575 14 13.975 14 14.575V20.575C14 21.175 14.4 21.575 15 21.575H21C21.6 21.575 22 21.175 22 20.575V9.575L13 2.375C12.4 1.875 11.6 1.875 11 2.375Z" fill="currentColor"/>
+		</svg></span>
+		<!--end::Svg Icon-->',
 		'session' => ((!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "members") ? 0 : 1),
 		'loadLangs' => array(),
 		'submenus' => array(),
@@ -383,7 +391,7 @@ function print_eldy_menu($db, $atarget, $type_user, &$tabMenu, &$menu, $noout = 
 		'loadLangs' => array("holiday"),
 		'submenus' => array(),
 	);
-
+	
 	// Tickets and knowledge base
 	$tmpentry = array(
 		'enabled'=>(!empty($conf->ticket->enabled) || !empty($conf->knowledgemanagement->enabled)),
@@ -593,10 +601,7 @@ function print_eldy_menu_metronic($db, $atarget, $type_user, &$tabMenu, &$menu, 
 
 	$substitarray = getCommonSubstitutionArray($langs, 0, null, null);
 
-	if (empty($noout)) {
-		print_start_menu_array();
-	}
-
+	
 	$usemenuhider = 1;
 
 	// Show/Hide vertical menu. The hamburger icon for .menuhider action.
@@ -649,7 +654,7 @@ function print_eldy_menu_metronic($db, $atarget, $type_user, &$tabMenu, &$menu, 
 		'id' => $id,
 		'idsel' => 'members',
 		'classname' =>  $classname = (!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "members") ? 'class="tmenusel"' : 'class="tmenu"',
-		'prefix' => img_picto('', 'member', 'class="fa-fw paddingright"'),
+		'prefix' =>img_picto('', 'member', 'class="fa-fw paddingright"'),
 		'session' => ((!empty($_SESSION["mainmenu"]) && $_SESSION["mainmenu"] == "members") ? 0 : 1),
 		'loadLangs' => array(),
 		'submenus' => array(),
@@ -1108,17 +1113,12 @@ function print_eldy_menu_metronic($db, $atarget, $type_user, &$tabMenu, &$menu, 
 		if($menuval['position']!==0){
 			print '<div class="menu-item">
 			<a class="menu-link paddingIcono" href="'.$menuval['url'].'" title="" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
-				<span class="menu-icon">
+				<span class="menu-icon ">
 					<!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
-					<span class="svg-icon svg-icon-2">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-							<path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="currentColor"></path>
-							<path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="currentColor"></path>
-						</svg>
-					</span>
+					'.$menuval['prefix'].'
 					<!--end::Svg Icon-->
 				</span>
-				<span class="menu-title coloGris">'.$menuval['titre'].'</span>
+				<span class="menu-title ">'.$menuval['titre'].'</span>
 			</a>
 			</div>';
 		}
@@ -1128,14 +1128,14 @@ function print_eldy_menu_metronic($db, $atarget, $type_user, &$tabMenu, &$menu, 
 		}
 	}
 
-	$showmode = 1;
-	if (empty($noout)) {
-		print_start_menu_entry('', 'class="tmenuend"', $showmode);
-		print_end_menu_entry($showmode);
-		print_end_menu_array();
-	}
+	// $showmode = 1;
+	// if (empty($noout)) {
+	// 	print_start_menu_entry('', 'class="tmenuend"', $showmode);
+	// 	print_end_menu_entry($showmode);
+	// 	print_end_menu_array();
+	// }
 
-	return 0;
+	 return 0;
 }
 
 
@@ -4644,12 +4644,13 @@ function print_left_eldy_menu_metronic_test($db, $menu_array_before, $menu_array
 		$num = count($menu_array);
 		$array[]=[];
 		$texto='';
+		logger(json_encode($menu_array));
 		logger(json_encode($num));
-		logger(json_encode($menu_array[40]));
+		
 		for ($i = 0; $i < $num; $i++) {
-
-
+		
 			if($menu_array[$i]['level']==0){
+			print '<!-- inicio::level 0 -->';
 			print '<div data-kt-menu-trigger="{default: \'click\', lg: \'hover\'}" data-kt-menu-placement="bottom-start" class="menu-item here show menu-lg-down-accordion me-lg-1">';
 
 			print '<span  class="py-3 ">
@@ -4661,14 +4662,18 @@ function print_left_eldy_menu_metronic_test($db, $menu_array_before, $menu_array
 			
 		  // abierto 1A
 			if($menu_array[$i+1]['level']==1 && $menu_array[$i]['level']==0 ){
-             $texto=$texto.'<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
+             $texto=$texto.'
+			 <!-- inicio:: nivel 1-->
+			 <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
 			 <div class="hover-scroll-overlay-y mh-300px">';
 			}
 			
 		
 
-            if($menu_array[$i]['level']==1 && ($menu_array[$i+1]['level']==1 )){
-			 $texto=$texto.' <div class="menu-item">
+            if($menu_array[$i]['level']==1  && $menu_array[$i+1]['level']==1){
+			 $texto=$texto.' 
+			 <!-- add item :: nivel 1-->
+			 <div class="menu-item">
 				<a class="menu-link  py-3" href="'.$menu_array[$i]['url'].'">
 					<span class="menu-bullet">
 						<span class="bullet bullet-dot"></span>
@@ -4678,7 +4683,9 @@ function print_left_eldy_menu_metronic_test($db, $menu_array_before, $menu_array
 			</div>';
 			}
 			if($menu_array[$i]['level']==1 && $menu_array[$i+1]['level']==2 ){
-				$texto=$texto.'<div data-kt-menu-trigger="{default: \'click\', lg: \'hover\'}" data-kt-menu-placement="right-start" class="menu-item   menu-lg-down-accordion me-lg-1">
+				$texto=$texto.'
+				<!-- inicio:: nivel 2-->
+				<div data-kt-menu-trigger="{default: \'click\', lg: \'hover\'}" data-kt-menu-placement="right-start" class="menu-item   menu-lg-down-accordion me-lg-1">
 						<span class="menu-link py-3">
 							<span class="menu-icon">
 								<!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
@@ -4700,8 +4707,10 @@ function print_left_eldy_menu_metronic_test($db, $menu_array_before, $menu_array
 						;
 			   }
    
-			   if($menu_array[$i]['level']==2 && ($menu_array[$i-1]['level']==1 ||$menu_array[$i+1]['level']==2 )){
-				$texto=$texto.'<div class="menu-item">
+			   if($menu_array[$i]['level']==2){
+				$texto=$texto.'
+				<!-- inicio add item::nivel 2-->
+				<div class="menu-item">
 				   <a class="menu-link  py-3" href="'.$menu_array[$i]['url'].'">
 					   <span class="menu-bullet">
 						   <span class="bullet bullet-dot"></span>
@@ -4713,29 +4722,39 @@ function print_left_eldy_menu_metronic_test($db, $menu_array_before, $menu_array
 			   // cierre 1A
 			   print $texto;
 			   $texto="";
-			if($menu_array[$i+1]['level']==0 && $menu_array[$i]['level']==1){
+			if(($menu_array[$i+1]['level']===0 ||$i===$num-1)&& $menu_array[$i]['level']===1 ){
 				//print $texto;
 				$texto="";
 				print ' </div>';
+				print '<!-- fin add item::nivel 1-->';
 			    print ' </div>';
+				print '<!-- fin::nivel 1-->';
 			}
 
-			if($menu_array[$i+1]['level']==1 && $menu_array[$i]['level']==2){
+			if(($menu_array[$i+1]['level']==1 || $i===$num-1)&& $menu_array[$i]['level']==2){
 				//print $texto;
 				$texto="";
 				print '</div>';
+				print '<!-- fin add item caso 1 y 2::nivel 2-->';
 				print '</div>';
-			}
-			if($i+1==$num){
-				//print $texto;
-				
-				print '</div>';
-				print '</div>';
-				print '</div>';
+				print '<!-- fin::nivel 2-->';
+
+				if($i===$num-1){
+						print '</div>';
+						print '<!-- fin add item caso 1 y 2::nivel 2-->';
+				}
+				// if($menu_array[$i]['level']==2 && $i=$num-1){
+				// 	print '<!-- fin::no hay mas elementos-->';
+				// 	print '</div>';
+				// 	print '<!-- fin::nivel 1-->';
+				// }
 			}
 			
-		if($menu_array[$i+1]['level']==0 ) {
+			
+		if(($menu_array[$i+1]['level']===0 || $i===$num-1)) {
+			logger(json_encode('esta es una prueba ox '.$menu_array[$i+1]['titre']));
 			print '</div>';
+			print '<!-- fin:level 0-->';
 			}
 			
 			

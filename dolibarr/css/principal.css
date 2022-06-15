@@ -11,3 +11,30 @@
 .paddingIcono{
     padding-left: 22px !important;
 }
+.colorGris{
+    color: #9899ac !important;
+}
+
+#kt_aside .menu-item .menu-link:hover:not(.disabled):not(.active) {
+    transition: color 0.2s ease, background-color 0.2s ease;
+    background-color: #1b1b28;
+    color: #ffffff!important;
+}
+#kt_aside .menu-item .menu-link:hover:not(.disabled):not(.active)  .fas{
+    transition: color 0.2s ease, background-color 0.2s ease;
+    color: #009ef7 !important;
+}
+#kt_aside .menu-item .menu-link:hover:not(.disabled):not(.active)  .fas{
+    transition: color 0.2s ease, background-color 0.2s ease;
+    color: #009ef7 !important;
+}
+a:link, a:visited, a:hover, a:active, .classlink{
+    color:#9899ac ;
+    text-decoration: none;
+
+}
+#kt_aside  .fas {
+    color: unset !important;
+}
+
+
