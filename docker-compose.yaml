@@ -2,14 +2,14 @@ version: "3.9"
 services: 
   db:
     image: mysql:5.6
-    container_name: docker-mysql
+    container_name: docker-mysql-test
     environment:
       MYSQL_DATABASE: dolibarr
       MYSQL_USER: dolibarr
       MYSQL_PASSWORD: dolibarr
       MYSQL_ROOT_PASSWORD: dolibarr
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - ./mysql:/var/lib/mysql
     networks:
@@ -24,10 +24,10 @@ services:
     build:
       context: ./
       dockerfile: DockerFile
-    container_name: servidor_php
+    container_name: servidor_php-test
     restart: always
     ports:
-      - 8080:80
+      - 8081:80
     volumes:
       - ./dolibarr:/var/www/html
     environment:
@@ -48,10 +48,11 @@ services:
     #        - php_alias
   phpmyadmin:
         image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin-test
         links: 
             - db:db
         ports:
-            - 8000:80
+            - 8001:80
         environment:
           MYSQL_DATABASE: dolibarr
           MYSQL_USER: dolibarr
@@ -61,6 +62,11 @@ services:
 volumes:
   html: {}
   data:
+
+networks:
+  default:  
+    external:
+      name: erp-brik
 # networks:
 #   net_server:
 #     name: test

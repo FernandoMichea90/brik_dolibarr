@@ -18,8 +18,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
- */
-
+ *
 /**
  *	\file       htdocs/index.php
  *	\brief      Dolibarr home page
@@ -79,8 +78,12 @@ if (!empty($conf->global->MAIN_APPLICATION_TITLE)) {
 	$title = $langs->trans("HomeArea").' - '.$conf->global->MAIN_APPLICATION_TITLE;
 }
 
+
+
+
 llxHeader('', $title);
 
+// llxHeader('', $title);
 
 $resultboxes = FormOther::getBoxesArea($user, "0"); // Load $resultboxes (selectboxlist + boxactivated + boxlista + boxlistb)
 

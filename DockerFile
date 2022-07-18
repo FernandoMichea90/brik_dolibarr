@@ -17,3 +17,4 @@ RUN docker-php-ext-install calendar
 RUN apt-get update -y && apt-get install -y sendmail libpng-dev
 RUN docker-php-ext-install gd
 RUN docker-php-ext-install mysqli 
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

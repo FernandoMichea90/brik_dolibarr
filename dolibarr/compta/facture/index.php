@@ -56,7 +56,6 @@ llxHeader("", $langs->trans("CustomersInvoicesArea"), "EN:Customers_Invoices|FR:
 print load_fiche_titre($langs->trans("CustomersInvoicesArea"), '', 'bill');
 
 print '<div class="fichecenter">';
-
 print '<div class="fichethirdleft">';
 $tmp = getNumberInvoicesPieChart('customers');
 if ($tmp) {

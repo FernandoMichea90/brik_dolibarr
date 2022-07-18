@@ -91,7 +91,8 @@ $search_montant_ht = GETPOST('search_montant_ht', 'alpha');
 $search_montant_ttc = GETPOST('search_montant_ttc', 'alpha');
 $origin = GETPOST('origin', 'alpha');
 $originid = (GETPOST('originid', 'int') ? GETPOST('originid', 'int') : GETPOST('origin_id', 'int')); // For backward compatibility
-$fac_rec = GETPOST('fac_rec', 'int');
+$fac_rec = GETPOST('fac_rec', 'int');  	 	
+// el id de la factura 
 $facid = GETPOST('facid', 'int');
 $ref_client = GETPOST('ref_client', 'int');
 
@@ -104,6 +105,7 @@ $hideref = (GETPOST('hideref', 'int') ? GETPOST('hideref', 'int') : (!empty($con
 $NBLINES = 4;
 
 $usehm = (!empty($conf->global->MAIN_USE_HOURMIN_IN_DATE_RANGE) ? $conf->global->MAIN_USE_HOURMIN_IN_DATE_RANGE : 0);
+
 
 $object = new Facture($db);
 $extrafields = new ExtraFields($db);
@@ -171,6 +173,7 @@ $reshook = $hookmanager->executeHooks('doActions', $parameters, $object, $action
 if ($reshook < 0) {
 	setEventMessages($hookmanager->error, $hookmanager->errors, 'errors');
 }
+
 
 if (empty($reshook)) {
 	$backurlforlist = DOL_URL_ROOT.'/compta/facture/list.php';
@@ -870,6 +873,7 @@ if (empty($reshook)) {
 				$sql .= ' WHERE pf.fk_facture = '.((int) $object->id);
 				$sql .= ' AND pf.fk_paiement = p.rowid';
 				$sql .= ' AND p.entity IN ('.getEntity('invoice').')';
+				print $sql;
 				$resql = $db->query($sql);
 				if (!$resql) {
 					dol_print_error($db);
@@ -885,6 +889,7 @@ if (empty($reshook)) {
 				$sql .= " FROM ".MAIN_DB_PREFIX."societe_remise_except as re";
 				$sql .= " WHERE fk_facture = ".((int) $object->id);
 				$resql = $db->query($sql);
+				//print $sql;
 				if (!empty($resql)) {
 					while ($obj = $db->fetch_object($resql)) {
 						$total_creditnote_and_deposit += $obj->amount_ttc;
@@ -2832,6 +2837,8 @@ $formother = new FormOther($db);
 $formfile = new FormFile($db);
 $formmargin = new FormMargin($db);
 $soc = new Societe($db);
+
+
 $paymentstatic = new Paiement($db);
 $bankaccountstatic = new Account($db);
 if (!empty($conf->projet->enabled)) {
@@ -2845,6 +2852,7 @@ $title = $langs->trans('InvoiceCustomer')." - ".$langs->trans('Card');
 $help_url = "EN:Customers_Invoices|FR:Factures_Clients|ES:Facturas_a_clientes";
 
 llxHeader('', $title, $help_url);
+
 
 // Mode creation
 
@@ -2999,7 +3007,6 @@ if ($action == 'create') {
 	}
 	$note_public = $object->getDefaultCreateValueFor('note_public', ((!empty($origin) && !empty($originid) && is_object($objectsrc) && !empty($conf->global->FACTURE_REUSE_NOTES_ON_CREATE_FROM)) ? $objectsrc->note_public : null));
 	$note_private = $object->getDefaultCreateValueFor('note_private', ((!empty($origin) && !empty($originid) && is_object($objectsrc) && !empty($conf->global->FACTURE_REUSE_NOTES_ON_CREATE_FROM)) ? $objectsrc->note_private : null));
-
 	if (!empty($conf->use_javascript_ajax)) {
 		require_once DOL_DOCUMENT_ROOT.'/core/lib/ajax.lib.php';
 		print ajax_combobox('fac_replacement');
@@ -3016,7 +3023,7 @@ if ($action == 'create') {
 		}
 		print info_admin($text, 0, 0, 0).'<br>';
 	}
-
+	
 	print '<form name="add" action="'.$_SERVER["PHP_SELF"].'" method="POST" id="formtocreate" name="formtocreate">';
 	print '<input type="hidden" name="token" value="'.newToken().'">';
 	print '<input type="hidden" name="action" value="add">';
@@ -3808,6 +3815,9 @@ if ($action == 'create') {
 
 	print "</form>\n";
 } elseif ($id > 0 || !empty($ref)) {
+	print '<h1>hola </h1>';
+
+
 	if (empty($object->id)) {
 		llxHeader();
 		$langs->load('errors');
@@ -5236,7 +5246,7 @@ if ($action == 'create') {
 			print '<table id="tablelines_all_progress" class="noborder noshadow" width="100%">';
 
 			print '<tr class="liste_titre nodrag nodrop">';
-
+			
 			// Adds a line numbering column
 			if (!empty($conf->global->MAIN_VIEW_LINE_NUMBER)) {
 				print '<td align="center" width="5">&nbsp;</td>';
@@ -5309,7 +5319,6 @@ if ($action == 'create') {
 
 	if ($action != 'prerelance' && $action != 'presend' && $action != 'valid' && $action != 'editline') {
 		print '<div class="tabsAction">';
-
 		$parameters = array();
 		$reshook = $hookmanager->executeHooks('addMoreActionsButtons', $parameters, $object, $action); // Note that $action and $object may have been modified by hook
 		if (empty($reshook)) {
