@@ -32,7 +32,6 @@ CREATE TABLE llx_sii_prueba(
 	fk_user_modif integer, 
 	last_main_doc varchar(255), 
 	import_key varchar(14), 
-	model_pdf varchar(255), 
 	status integer NOT NULL, 
 	fk_facture integer
 	-- END MODULEBUILDER FIELDS

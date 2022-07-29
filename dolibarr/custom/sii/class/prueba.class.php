@@ -118,7 +118,6 @@ class Prueba extends CommonObject
 		'fk_user_modif' => array('type'=>'integer:User:user/class/user.class.php', 'label'=>'UserModif', 'enabled'=>'1', 'position'=>511, 'notnull'=>-1, 'visible'=>-2,),
 		'last_main_doc' => array('type'=>'varchar(255)', 'label'=>'LastMainDoc', 'enabled'=>'1', 'position'=>600, 'notnull'=>0, 'visible'=>0,),
 		'import_key' => array('type'=>'varchar(14)', 'label'=>'ImportId', 'enabled'=>'1', 'position'=>1000, 'notnull'=>-1, 'visible'=>-2,),
-		'model_pdf' => array('type'=>'varchar(255)', 'label'=>'Model pdf', 'enabled'=>'1', 'position'=>1010, 'notnull'=>-1, 'visible'=>0,),
 		'status' => array('type'=>'integer', 'label'=>'Status', 'enabled'=>'1', 'position'=>1000, 'notnull'=>1, 'visible'=>1, 'index'=>1, 'arrayofkeyval'=>array('0'=>'Borrador', '1'=>'Validado', '9'=>'Cancelado'), 'validate'=>'1',),
 		'fk_facture' => array('type'=>'integer:Facture:compta/facture/class/facture.class.php:1:', 'label'=>'Factureid', 'enabled'=>'1', 'position'=>50, 'notnull'=>0, 'visible'=>-1,),
 	);
@@ -138,7 +137,6 @@ class Prueba extends CommonObject
 	public $fk_user_modif;
 	public $last_main_doc;
 	public $import_key;
-	public $model_pdf;
 	public $status;
 	public $fk_facture;
 	// END MODULEBUILDER PROPERTIES
