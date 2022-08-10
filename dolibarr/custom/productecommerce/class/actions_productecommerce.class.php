@@ -355,4 +355,24 @@ class ActionsProductEcommerce
 	}
 
 	/* Add here any other hooked methods... */
+    public function mostrarProductos($parameters, &$object, &$action, $hookmanager)
+	{
+	    print 'Aqui se muestran todos los productos';
+		global $conf, $user, $langs;
+            
+		$error = 0; // Error counter
+		$disabled = 1;
+
+		/* print_r($parameters); print_r($object); echo "action: " . $action; */
+		if (in_array($parameters['currentcontext'], array('productecommerce', 'somecontext2'))) {		// do something only for the context 'somecontext1' or 'somecontext2'
+			$this->resprints = '<option value="0"'.($disabled ? ' disabled="disabled"' : '').'>'.$langs->trans("ProductEcommerceMassAction").'</option>';
+		}
+
+		if (!$error) {
+			return 0; // or return 1 to replace standard code
+		} else {
+			$this->errors[] = 'Error message';
+			return -1;
+		}
+	}
 }
