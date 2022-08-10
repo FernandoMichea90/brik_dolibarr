@@ -16,11 +16,8 @@
 
 -- BEGIN MODULEBUILDER INDEXES
 ALTER TABLE llx_productecommerce_productecom ADD INDEX idx_productecommerce_productecom_rowid (rowid);
-ALTER TABLE llx_productecommerce_productecom ADD INDEX idx_productecommerce_productecom_ref (ref);
-ALTER TABLE llx_productecommerce_productecom ADD INDEX idx_productecommerce_productecom_fk_soc (fk_soc);
-ALTER TABLE llx_productecommerce_productecom ADD INDEX idx_productecommerce_productecom_fk_project (fk_project);
-ALTER TABLE llx_productecommerce_productecom ADD CONSTRAINT llx_productecommerce_productecom_fk_user_creat FOREIGN KEY (fk_user_creat) REFERENCES llx_user(rowid);
-ALTER TABLE llx_productecommerce_productecom ADD INDEX idx_productecommerce_productecom_status (status);
+ALTER TABLE llx_productecommerce_productecom ADD INDEX idx_productecommerce_productecom_fk_product (fk_product);
+ALTER TABLE llx_productecommerce_productecom ADD INDEX idx_productecommerce_productecom_estado (estado);
 -- END MODULEBUILDER INDEXES
 
 --ALTER TABLE llx_productecommerce_productecom ADD UNIQUE INDEX uk_productecommerce_productecom_fieldxy(fieldx, fieldy);
