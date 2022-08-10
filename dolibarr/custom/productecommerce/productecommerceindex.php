@@ -95,9 +95,8 @@ llxHeader("", $langs->trans("ProductEcommerceArea"));
 
 print load_fiche_titre($langs->trans("ProductEcommerceArea"), '', 'productecommerce.png@productecommerce');
 
-print '<div class="fichecenter"><div class="fichethirdleft">';
+print '<div class="fichecenter"><div class="divproductoscentral">';
  
-print 'Hola mundo';
 include_once(DOL_DOCUMENT_ROOT.'/core/class/hookmanager.class.php');
 $hookmanager=new HookManager($db);
 $hookmanager->initHooks(array('productecommerce'));
