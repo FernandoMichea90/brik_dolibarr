@@ -1,0 +1,56 @@
+= PRODUCTECOMMERCE =
+:subtitle: PRODUCTECOMMERCE DOCUMENTATION
+:source-highlighter: rouge
+:companyname: 
+:corpname: 
+:orgname: 
+:creator: SuperAdmin
+:title: Documentation of module ProductEcommerce
+:subject: This document is the document of module ProductEcommerce.
+:keywords: ProductEcommerce
+// Date du document :
+:docdate: 2022-08-10
+:toc: manual
+:toc-placement: preamble
+
+
+== TOPIC OF DOCUMENT
+
+This is the documentation of module ProductEcommerce
+
+
+*Log of versions of document*
+
+[options="header",format="csv"]
+|=== 
+Author, Date, Version
+--- SuperAdmin   ---, 2022-08-10, Version 1.0
+|===
+
+
+[NOTE]
+==============
+This document was generated using Dolibarr ERP CRM process
+==============
+
+
+:toc: manual
+:toc-placement: preamble
+
+<<<
+
+== INTRODUCTION
+
+//include::README.md[]
+__README__
+
+== DATA SPECIFICATIONS
+
+__DATA_SPECIFICATION__
+
+
+== CHANGELOG
+
+//include::ChangeLog.md[]
+__CHANGELOG__
+

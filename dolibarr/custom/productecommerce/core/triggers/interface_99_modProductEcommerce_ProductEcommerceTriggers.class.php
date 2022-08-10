@@ -16,15 +16,15 @@
  */
 
 /**
- * \file    core/triggers/interface_99_modSii_SiiTriggers.class.php
- * \ingroup sii
+ * \file    core/triggers/interface_99_modProductEcommerce_ProductEcommerceTriggers.class.php
+ * \ingroup productecommerce
  * \brief   Example trigger.
  *
  * Put detailed description here.
  *
  * \remarks You can create other triggers by copying this one.
  * - File name should be either:
- *      - interface_99_modSii_MyTrigger.class.php
+ *      - interface_99_modProductEcommerce_MyTrigger.class.php
  *      - interface_99_all_MyTrigger.class.php
  * - The file must stay in core/triggers
  * - The class name must be InterfaceMytrigger
@@ -34,9 +34,9 @@ require_once DOL_DOCUMENT_ROOT.'/core/triggers/dolibarrtriggers.class.php';
 
 
 /**
- *  Class of triggers for Sii module
+ *  Class of triggers for ProductEcommerce module
  */
-class InterfaceSiiTriggers extends DolibarrTriggers
+class InterfaceProductEcommerceTriggers extends DolibarrTriggers
 {
 	/**
 	 * Constructor
@@ -49,10 +49,10 @@ class InterfaceSiiTriggers extends DolibarrTriggers
 
 		$this->name = preg_replace('/^Interface/i', '', get_class($this));
 		$this->family = "demo";
-		$this->description = "Sii triggers.";
+		$this->description = "ProductEcommerce triggers.";
 		// 'development', 'experimental', 'dolibarr' or version
 		$this->version = 'development';
-		$this->picto = 'sii@sii';
+		$this->picto = 'productecommerce@productecommerce';
 	}
 
 	/**
@@ -90,7 +90,7 @@ class InterfaceSiiTriggers extends DolibarrTriggers
 	 */
 	public function runTrigger($action, $object, User $user, Translate $langs, Conf $conf)
 	{
-		if (empty($conf->sii) || empty($conf->sii->enabled)) {
+		if (empty($conf->productecommerce) || empty($conf->productecommerce->enabled)) {
 			return 0; // If module is not enabled, we do nothing
 		}
 
