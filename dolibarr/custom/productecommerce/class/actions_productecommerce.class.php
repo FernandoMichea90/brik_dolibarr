@@ -24,6 +24,17 @@
  */
 require_once DOL_DOCUMENT_ROOT . '/product/class/product.class.php';
 require_once DOL_DOCUMENT_ROOT . '/custom/productecommerce/class/productecom.class.php';
+require_once DOL_DOCUMENT_ROOT.'/core/class/html.formfile.class.php';
+require_once DOL_DOCUMENT_ROOT.'/core/class/canvas.class.php';
+require_once DOL_DOCUMENT_ROOT.'/product/class/product.class.php';
+require_once DOL_DOCUMENT_ROOT.'/product/class/html.formproduct.class.php';
+require_once DOL_DOCUMENT_ROOT.'/core/class/html.formcompany.class.php';
+require_once DOL_DOCUMENT_ROOT.'/core/class/extrafields.class.php';
+require_once DOL_DOCUMENT_ROOT.'/core/class/genericobject.class.php';
+require_once DOL_DOCUMENT_ROOT.'/core/lib/product.lib.php';
+require_once DOL_DOCUMENT_ROOT.'/core/lib/company.lib.php';
+require_once DOL_DOCUMENT_ROOT.'/categories/class/categorie.class.php';
+require_once DOL_DOCUMENT_ROOT.'/core/modules/product/modules_product.class.php';
 
 
 /**
@@ -525,6 +536,44 @@ class ActionsProductEcommerce
 
 
 	// vista para habilitar el producto en ecommerce
-		
+
+	public function estadoProductoEcommerce($parameters, &$object, &$action, $hookmanager) {
+		// hola mundo 
+	
+
+print '
+<div class="fichecenter">
+<div class="fichehalfleft"><a name="builddoc"></a>
+<!-- Start show_document -->
+<form action="/product/card.php?id=1" id="builddoc_form" method="post"><input type="hidden" name="action" value="builddoc"><input type="hidden" name="page_y" value=""><input type="hidden" name="token" value="2455a5051060ae2e24473183df91ed43">
+<table class="centpercent notopnoleftnoright table-fiche-title"><tbody><tr class="titre"><td class="nobordernopadding valignmiddle col-title"><div class="titre inline-block">Ecommerce</div></td></tr></tbody></table>
+<div class="div-table-responsive-no-min"><table class="liste formdoc noborder centpercent"><tbody><tr class="liste_titre"><th colspan="5" class="formdoc liste_titre maxwidthonsmartphone center"><div class="float">Estado Producto</div>&nbsp;</th></tr><!-- html.formfile::showdocuments -->
+<tr>
+<td colspan="4"><span class="opacitymedium">Ecommerce</span></td>
+<td colspan="4"><span>';
+$caja_estado = '<div class="valignmiddle inline-block marginleftonly marginrightonly">';
+						$caja_estado .= '<a class="reposition valignmiddle" href="'.$_SERVER["PHP_SELF"].'?product='.'&estado=active">';
+						$caja_estado .= img_picto("Activado", 'switch_off');
+						$caja_estado .= '</a> </div>';
+print $caja_estado;
+print '</span></td>
+<tr>
+<td colspan="4"><span class="opacitymedium">Mercado Libre</span></td>
+<td colspan="4"><span >';
+$caja_estado = '<div class="valignmiddle inline-block marginleftonly marginrightonly">';
+						$caja_estado .= '<a class="reposition valignmiddle" href="'.$_SERVER["PHP_SELF"].'?product='.'&estado=active">';
+						$caja_estado .= img_picto("Activado", 'switch_on');
+						$caja_estado .= '</a> </div>';
+print $caja_estado;
+print '</span></td>
+</tbody></table>
+</div>
+</form>
+<!-- End show_document -->
+</div>
+</div>
+</div>';
+// fin hola mundo 
+	}
 }
 

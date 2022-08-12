@@ -18,6 +18,6 @@ CREATE TABLE llx_productecommerce_productecom(
 	-- BEGIN MODULEBUILDER FIELDS
 	rowid integer AUTO_INCREMENT PRIMARY KEY NOT NULL, 
 	fk_product integer NOT NULL, 
-	estado boolean NOT NULL
+	estado boolean
 	-- END MODULEBUILDER FIELDS
 ) ENGINE=innodb;

@@ -54,7 +54,7 @@ if (!$res && file_exists("../../../main.inc.php")) {
 if (!$res) {
 	die("Include of main fails");
 }
-
+require_once DOL_DOCUMENT_ROOT . '/custom/productecommerce/class/productecom.class.php';
 require_once DOL_DOCUMENT_ROOT.'/core/class/html.formfile.class.php';
 
 // Load translation files required by the page
@@ -101,8 +101,12 @@ include_once(DOL_DOCUMENT_ROOT.'/core/class/hookmanager.class.php');
 $hookmanager=new HookManager($db);
 $hookmanager->initHooks(array('productecommerce'));
 $parameters=array();
-$reshook=$hookmanager->executeHooks('mostrarProductos',$parameters,$object,$action); //
+$reshook=$hookmanager->executeHooks('estadoProductoEcommerce',$parameters,$object,$action); //
 
+// $ProductEcom=new ProductEcom($db);
+// $ProductEcom->fk_product=1;
+// $ProductEcom->estado=1;
+// $ProductEcom->create($user);
 /* BEGIN MODULEBUILDER DRAFT MYOBJECT
 // Draft MyObject
 if (! empty($conf->productecommerce->enabled) && $user->rights->productecommerce->read)

@@ -275,7 +275,7 @@ if ($action == 'create') {
 
 	print dol_get_fiche_end();
 
-	print $form->buttonsSaveCancel("Create");
+	 print $form->buttonsSaveCancel("Create");
 
 	print '</form>';
 
@@ -285,7 +285,7 @@ if ($action == 'create') {
 // Part to edit record
 if (($id || $ref) && $action == 'edit') {
 	print load_fiche_titre($langs->trans("ProductEcom"), '', 'object_'.$object->picto);
-
+	// print $object->picto;
 	print '<form method="POST" action="'.$_SERVER["PHP_SELF"].'">';
 	print '<input type="hidden" name="token" value="'.newToken().'">';
 	print '<input type="hidden" name="action" value="update">';

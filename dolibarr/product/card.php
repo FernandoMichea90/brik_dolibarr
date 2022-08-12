@@ -2711,10 +2711,20 @@ if ($action != 'create' && $action != 'edit' && $action != 'delete') {
 	include_once DOL_DOCUMENT_ROOT.'/core/class/html.formactions.class.php';
 	$formactions = new FormActions($db);
 	$somethingshown = $formactions->showactions($object, 'product', 0, 1, '', $MAXEVENT, '', $morehtmlcenter); // Show all action for product
-
+	
 	print '</div></div>';
+		
 }
 
+
+
+include_once(DOL_DOCUMENT_ROOT.'/core/class/hookmanager.class.php');
+$hookmanager=new HookManager($db);
+$hookmanager->initHooks(array('productecommerce'));
+$parameters=array(
+	"langs" => $langs
+);
+$reshook=$hookmanager->executeHooks('estadoProductoEcommerce',$parameters,$object,$action); //
 // End of page
 llxFooter();
 $db->close();
