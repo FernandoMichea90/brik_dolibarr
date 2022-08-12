@@ -23,7 +23,7 @@
  * Put detailed description here.
  */
 require_once DOL_DOCUMENT_ROOT . '/product/class/product.class.php';
-// require_once DOL_DOCUMENT_ROOT . '/custom/productecommerce/class/productecom.class.php';
+require_once DOL_DOCUMENT_ROOT . '/custom/productecommerce/class/productecom.class.php';
 
 
 /**
@@ -420,10 +420,10 @@ class ActionsProductEcommerce
 					print '</tr>';
 
 					while ($i < $num) {
-						$this->existeProducto();
 						$objp = $db->fetch_object($result);
 
 						$product_static->id = $objp->rowid;
+						$this->existeProducto($product_static->id);
 						$product_static->ref = $objp->ref;
 						$product_static->label = $objp->label;
 						$product_static->type = $objp->fk_product_type;
@@ -514,8 +514,17 @@ class ActionsProductEcommerce
 	}
 
 	// ver si existe el producto en ecommerce 
-	public function existeProducto() {
-			print 'existe el producto';
+	public function existeProducto($id) {
+			global $db;
+			print 'existe el producto '.$id;
+			$prod=new ProductEcom($db);
+			print 'igual pasa';
+			$resp=$prod->fetch(1);
+			$resp;
 		}
+
+
+	// vista para habilitar el producto en ecommerce
+		
 }
 
