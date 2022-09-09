@@ -12,8 +12,7 @@ services:
       - "3306:3306"
     volumes:
       - ./mysql:/var/lib/mysql
-    networks:
-      - default
+  
     # networks:
     #   net_server:
     #     aliases:
@@ -35,13 +34,11 @@ services:
         DOLI_DB_USER: admin
         DOLI_DB_PASSWORD: 12345678
         DOLI_DB_NAME: dolibarr
-        DOLI_URL_ROOT: 'http://0.0.0.0'
+        DOLI_URL_ROOT: 'http://127.0.0.1'
         PHP_INI_DATE_TIMEZONE: 'Europe/Paris'
     links:
-       - db:db
-
-    networks:
-      - default
+       - db
+  
     # networks:
     #   net_server:
     #     aliases:
@@ -61,6 +58,13 @@ services:
 volumes:
   html: {}
   data:
+networks:
+  default:  
+    external:
+      name: doli-brik
+
+
+
 # networks:
 #   net_server:
 #     name: test

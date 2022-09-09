@@ -1031,6 +1031,37 @@ class ProductEcom extends CommonObject
 		$this->db->commit();
 
 		return $error;
+	}	
+
+	public function buscarPorProductoAsociado($fk_product){
+		if($fk_product==null){
+			$fk_product=0;
+		}
+		$this->db->begin();
+		$consulta ='SELECT * FROM '.MAIN_DB_PREFIX.$this->table_element.' WHERE fk_product='.$fk_product;
+		$estado_producto_ecommerce=false;
+		$resql = $this->db->query($consulta);
+		if ($resql)
+			{
+					$num = $this->db->num_rows($resql);
+					$i = 0;
+					if ($num)
+					{
+							while ($i < $num)
+							{
+									$obj = $this->db->fetch_object($resql);
+									if ($obj)
+									{
+											// You can use here results
+											$estado_producto_ecommerce=$obj;
+									}
+									$i++;
+							}
+					}
+			}else{
+				dol_print_error($this->db);
+			}
+			return $estado_producto_ecommerce;
 	}
 }
 

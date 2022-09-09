@@ -105,6 +105,10 @@ $accountancy_code_buy = GETPOST('accountancy_code_buy', 'alpha');
 $accountancy_code_buy_intra = GETPOST('accountancy_code_buy_intra', 'alpha');
 $accountancy_code_buy_export = GETPOST('accountancy_code_buy_export', 'alpha');
 
+//Tomar datos  de Ecommerce de Producto
+// $estado=GETPOST('estado');
+
+
 $checkmandatory = GETPOST('accountancy_code_buy_export', 'alpha');
 // by default 'alphanohtml' (better security); hidden conf MAIN_SECURITY_ALLOW_UNSECURED_LABELS_WITH_HTML allows basic html
 $label_security_check = empty($conf->global->MAIN_SECURITY_ALLOW_UNSECURED_LABELS_WITH_HTML) ? 'alphanohtml' : 'restricthtml';
@@ -2721,10 +2725,25 @@ if ($action != 'create' && $action != 'edit' && $action != 'delete') {
 include_once(DOL_DOCUMENT_ROOT.'/core/class/hookmanager.class.php');
 $hookmanager=new HookManager($db);
 $hookmanager->initHooks(array('productecommerce'));
+
+//cambiar el estado del productecommerce
 $parameters=array(
-	"langs" => $langs
+ "estado"=>GETPOST('estado'),
+ "fk_product"=>$id,
+);
+
+$reshook=$hookmanager->executeHooks('activeDesactiveProducto',$parameters, $object, $actions);
+$reshook->resprints;
+//
+
+
+
+
+$parameters=array(
+	"id_producto"=>$id
 );
 $reshook=$hookmanager->executeHooks('estadoProductoEcommerce',$parameters,$object,$action); //
 // End of page
+
 llxFooter();
 $db->close();
