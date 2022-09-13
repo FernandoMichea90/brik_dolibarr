@@ -355,7 +355,6 @@ if (empty($reshook)) {
 	$permissiontoadd = $user->rights->{$rightskey}->creer;
 	$uploaddir = $conf->product->dir_output;
 	include DOL_DOCUMENT_ROOT.'/core/actions_massactions.inc.php';
-
 	if (!$error && $massaction == 'switchonsalestatus' && $permissiontoadd) {
 		$product = new Product($db);
 		foreach ($toselect as $toselectid) {
@@ -1367,6 +1366,7 @@ if ($resql) {
 			}
 		}
 
+
 		// Label
 		if (!empty($arrayfields['p.label']['checked'])) {
 			print '<td class="tdoverflowmax200" title="'.dol_escape_htmltag($obj->label).'">'.$obj->label.'</td>';
@@ -1581,6 +1581,7 @@ if ($resql) {
 				$totalarray['nbfield']++;
 			}
 		}
+
 
 
 		// Multiprices
